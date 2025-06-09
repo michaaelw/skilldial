@@ -29,13 +29,10 @@ export const ThemeContext = createContext<ThemeContextType>({
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const colorScheme = useColorScheme();
   const [currentScheme, setCurrentScheme] = useState<Schemes>(null);
-  const [effectiveColorScheme, setEffectiveColorScheme] = useState(
-    currentScheme === null ? 'light' : currentScheme
-  );
   const [media, setMedia] = useState<Partial<Record<keyof Theme['breakpoints'], boolean>>>({});
   const dimensions = useWindowDimensions();
 
-  const theme = effectiveColorScheme === 'dark' ? darkTheme : lightTheme;
+  const theme = currentScheme === 'dark' ? darkTheme : lightTheme;
 
   useEffect(() => {
     if (dimensions.width > theme.breakpoints.md) {
@@ -56,11 +53,6 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
       setMedia((media) => ({ ...media, xl: false }));
     }
   }, [dimensions.width]);
-
-  useEffect(() => {
-    setCurrentScheme(colorScheme);
-    setEffectiveColorScheme(currentScheme === null ? 'light' : currentScheme);
-  }, [currentScheme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setCurrentScheme, currentScheme, media }}>
