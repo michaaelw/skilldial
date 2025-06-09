@@ -1,5 +1,5 @@
 const isDev = process.env.APP_VARIANT === 'dev';
-console.log('isDev ', isDev);
+
 require('@dotenvx/dotenvx').config({ path: isDev ? '.env.development' : '.env.production' });
 
 module.exports = ({ config }) => {

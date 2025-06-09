@@ -10,7 +10,7 @@ import { GoogleIcon } from '@/components/icons/Google';
 import { Mail } from 'lucide-react-native';
 import { useAuthPresenter } from './AuthPresenter';
 import { useAuth } from './AuthContext';
-import { gap8, p8, textCenter } from '@/styles';
+import { gap16, gap8, p8, textCenter } from '@/styles';
 import { Text } from '@/components/Text';
 
 export function LoginScreen() {
@@ -31,7 +31,7 @@ export function LoginScreen() {
   }));
   return (
     <Container>
-      <Column style={[gap8, p8]}>
+      <Column style={[gap16, p8]}>
         <Text variant="h1"> Get Started</Text>
         <Text>Create an account or login to keep your cards safe and access all features.</Text>
         <Button

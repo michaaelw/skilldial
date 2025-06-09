@@ -12,7 +12,7 @@ export default function Layout() {
       <ThemeProvider>
         <GestureHandlerRootView>
           <AuthProvider>
-            <Stack />
+            <Stack screenOptions={{ headerShown: false }} />
           </AuthProvider>
         </GestureHandlerRootView>
       </ThemeProvider>

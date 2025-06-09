@@ -1,19 +1,17 @@
-import { supabase } from '@/utils/supabase';
 import { useSelector } from '@legendapp/state/react';
-import { AuthChangeEvent, Session, User } from '@supabase/supabase-js';
-import { useState } from 'react';
+import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { authStore$ } from './AuthStore';
+
+import * as authService from './AuthService';
 
 export function useAuthPresenter() {
   const user = useSelector(authStore$.user);
 
-  console.log('auth context user ', user);
   const logout = () => {
-    supabase.auth.signOut();
+    authService.logout();
   };
 
   function handleAuthStateChange(event: AuthChangeEvent, session: Session | null) {
-    console.log('auth state changed ', event, session?.user);
     if (session?.user) {
       authStore$.user.set(session.user);
     } else {
@@ -22,10 +20,14 @@ export function useAuthPresenter() {
   }
 
   function loginInAnonymously() {
-    supabase.auth.signInAnonymously().then((res) => {
-      console.log('login response ', res);
-      authStore$.user.set(res.data.user);
-    });
+    authService
+      .loginInAnonymously()
+      .then((res) => {
+        authStore$.user.set(res.user);
+      })
+      .catch((err) => {
+        authStore$.error.set(err.message);
+      });
   }
 
   return {
