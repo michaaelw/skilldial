@@ -2,6 +2,7 @@ import { Text } from '@/components/Text';
 import { useTheme } from '@/components/ThemeProvider';
 import { DeckWithCardCount } from '@/types';
 import { pluralize } from '@/utils/pluralise';
+import { Link } from 'expo-router';
 import { FlatList, View, StyleSheet } from 'react-native';
 
 type DeckListProps = {
@@ -11,16 +12,19 @@ type DeckListProps = {
 export function DeckList({ decks }: DeckListProps) {
   const { media } = useTheme();
   const renderItem = ({ item }: { item: DeckWithCardCount }) => (
-    <View style={styles.item}>
-      <Text style={styles.name}>{item.name ?? 'Unnamed Deck'}</Text>
-      <Text style={styles.count}>
-        {item.card_count} {pluralize('card', item.card_count!)}
-      </Text>
-    </View>
+    <Link href={('/decks/' + item.slug) as never} style={styles.item}>
+      <View style={styles.item}>
+        <Text style={styles.name}>{item.name ?? 'Unnamed Deck'}</Text>
+        <Text style={styles.count}>
+          {item.card_count} {pluralize('card', item.card_count!)}
+        </Text>
+      </View>
+    </Link>
   );
 
   return (
     <FlatList
+      ListHeaderComponent={<Text variant="h1">Decks</Text>}
       key={media.md ? 'large' : 'small'}
       numColumns={media.md ? 3 : 1}
       data={decks}
