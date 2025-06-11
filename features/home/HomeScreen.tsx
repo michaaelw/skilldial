@@ -6,9 +6,15 @@ import { Container } from '@/components/Container';
 import { useIsMounted, useSelector } from '@legendapp/state/react';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useAuth } from '../auth/AuthContext';
+import { useDecks } from '../deck/DeckPresenter';
+import { useEffect } from 'react';
+import { DeckList } from '../deck/DeckList';
 
 export function HomeScreen() {
   const { user, logout } = useAuth();
+
+  const { decks, fetchDecks } = useDecks();
+
   const isMounted$ = useIsMounted();
   const isMounted = useSelector(isMounted$);
   const style = useAnimatedStyle(() => ({
@@ -20,9 +26,12 @@ export function HomeScreen() {
     return <Redirect href={'/login'} />;
   }
 
+  console.log('decks ', decks);
+
   return (
     <Container>
       <Animated.Text style={style}>Home</Animated.Text>
+      <DeckList decks={decks} />
       <Button title="Logout" onPress={logout}></Button>
     </Container>
   );

@@ -13,6 +13,7 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
     "web": "expo start --web",
+    "gen-types": "supabase gen types typescript --project-id ksknjgxxipaqkhhkwapl > database.types.ts",
     "build:ios:dev:local": "APP_VARIANT=dev npx dotenvx run -f .env.development -- eas build -p ios --profile development --local",
     "build:android:dev:local": "APP_VARIANT=dev npx dotenvx run -f .env.development -- eas build -p android --profile development --local",
     "build:ios:preview": "APP_VARIANT=dev npx dotenvx run -f .env.development -- eas build -p ios --profile preview"
@@ -52,6 +53,7 @@
     "eslint-config-expo": "^9.2.0",
     "eslint-config-prettier": "^10.1.2",
     "prettier": "^3.2.5",
+    "supabase": ">=1.8.1",
     "typescript": "~5.8.3"
   },
   "private": true,
