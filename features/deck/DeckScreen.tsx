@@ -27,7 +27,7 @@ function QuestionCard({ open, content, close }: CardProps) {
       transition={{ duration: 1000, type: 'timing' }}
       style={{
         zIndex: open ? 1 : 0,
-        flex: 1,
+        width: media.md ? 600 : '100%',
         gap: 16,
         height: 400,
         borderRadius: 16,
@@ -64,6 +64,7 @@ function SolutionCard({ open, content, close }: CardProps) {
         gap: 16,
         borderRadius: 16,
         padding: 16,
+        width: media.md ? 600 : '100%',
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundImage: 'linear-gradient(135deg, #22c55e, #16a34a)',
@@ -98,13 +99,20 @@ export function DeckScreen(props: DeckScreenProps) {
 
   return (
     <View
-      style={{ flex: 1, padding: 16, alignItems: 'center' }}
+      style={{ flex: 1, padding: 16, alignItems: 'center', gap: 16, marginTop: 48 }}
       from={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1000, type: 'timing' }}>
-      <Text variant="h1">{deck?.name || 'Deck Detail'}</Text>
+      <Text variant="h2">{deck?.name || 'Deck Detail'}</Text>
       <Column
-        style={{ gap: 16, position: 'relative', height: 400, width: media.md ? 400 : '100%' }}>
+        style={{
+          gap: 16,
+          position: 'relative',
+          height: 400,
+          flex: 1,
+          alignItems: 'center',
+          backgroundColor: 'red',
+        }}>
         <QuestionCard
           open={questionOpen}
           content={firstCard}
