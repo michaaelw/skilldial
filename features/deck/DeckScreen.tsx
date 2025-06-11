@@ -1,16 +1,30 @@
 import { Text } from '@/components/Text';
 import { useTheme } from '@/components/ThemeProvider';
-import { DeckWithCardCount } from '@/types';
-import { pluralize } from '@/utils/pluralise';
-import { Link } from 'expo-router';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { MotiView, View } from 'moti';
+import { useDeck, useDecks } from './DeckPresenter';
+import { useLocalSearchParams } from 'expo-router';
 
 type DeckScreenProps = {};
 
 export function DeckScreen(props: DeckScreenProps) {
   const { media } = useTheme();
+  const params = useLocalSearchParams<{ slug: string }>();
 
-  return <Text>Deck Detail</Text>;
+  const { deck } = useDeck({ slug: params?.slug });
+
+  const firstCard = deck?.cards?.[0];
+
+  return (
+    <View
+      from={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1000, type: 'timing' }}>
+      <Text>{deck?.name || 'Deck Detail'}</Text>
+
+      <Text>{firstCard?.question}</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

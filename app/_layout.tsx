@@ -6,6 +6,11 @@ import 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AuthProvider } from '@/features/auth/AuthContext';
 
+export const unstable_settings = {
+  // Ensure any route can link back to `/`
+  initialRouteName: 'index',
+};
+
 export default function Layout() {
   return (
     <NavigationThemeProvider value={DefaultTheme}>
