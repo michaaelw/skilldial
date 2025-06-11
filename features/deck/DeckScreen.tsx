@@ -66,8 +66,8 @@ function SolutionCard({ open, content, close }: CardProps) {
         padding: 16,
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundImage: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-        experimental_backgroundImage: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+        backgroundImage: 'linear-gradient(135deg, #22c55e, #16a34a)',
+        experimental_backgroundImage: 'linear-gradient(135deg, #16a34a, #16a34a)',
 
         flex: 1,
       }}>
