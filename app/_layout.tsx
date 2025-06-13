@@ -8,7 +8,7 @@ import { AuthProvider } from '@/features/auth/AuthContext';
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`
-  initialRouteName: 'index',
+  initialRouteName: '(landing)/index',
 };
 
 export default function Layout() {

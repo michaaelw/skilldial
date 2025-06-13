@@ -12,7 +12,7 @@ import {
 import { useTheme } from './ThemeProvider';
 import { Theme } from '@/theme';
 
-type Variants = 'primary' | 'secondary' | 'ghost' | 'dark';
+type Variants = 'primary' | 'secondary' | 'ghost' | 'outline';
 
 type ButtonProps = {
   title?: string;
@@ -97,12 +97,13 @@ function getButtonVariantStyle(variant: Variants, theme: Theme): ViewStyle {
         shadowRadius: 0,
         shadowOffset: { width: 0, height: 0 },
       };
-    case 'dark':
+    case 'outline':
       return {
         backgroundColor: '#222',
         borderWidth: 1,
-        borderColor: '#333',
+        borderColor: '#666',
         elevation: 0,
+        paddingHorizontal: 24,
         shadowColor: 'transparent',
         shadowOpacity: 0,
         shadowRadius: 0,
@@ -117,7 +118,7 @@ function getTextVariantStyle(variant: Variants, theme: Theme): TextStyle {
   switch (variant) {
     case 'primary':
     case 'secondary':
-    case 'dark':
+    case 'outline':
       return { color: theme.colors.white };
     case 'ghost':
       return { color: theme.colors.typography };
