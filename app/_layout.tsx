@@ -5,6 +5,7 @@ import 'react-native-reanimated';
 import 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AuthProvider } from '@/features/auth/AuthContext';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`
@@ -14,13 +15,15 @@ export const unstable_settings = {
 export default function Layout() {
   return (
     <NavigationThemeProvider value={DefaultTheme}>
-      <ThemeProvider>
-        <GestureHandlerRootView>
-          <AuthProvider>
-            <Stack screenOptions={{ headerShown: false }} />
-          </AuthProvider>
-        </GestureHandlerRootView>
-      </ThemeProvider>
+      <SafeAreaProvider>
+        <ThemeProvider>
+          <GestureHandlerRootView>
+            <AuthProvider>
+              <Stack screenOptions={{ headerShown: false }} />
+            </AuthProvider>
+          </GestureHandlerRootView>
+        </ThemeProvider>
+      </SafeAreaProvider>
     </NavigationThemeProvider>
   );
 }

@@ -5,11 +5,12 @@ import { MotiView, View } from 'moti';
 import { useDeck, useDecks } from './DeckPresenter';
 import { useLocalSearchParams } from 'expo-router';
 import { Column } from '@/components/Column';
-import { observable } from '@legendapp/state';
+
 import { useObservable, useSelector } from '@legendapp/state/react';
 import { Button } from '@/components/Button';
 import { Card } from '@/types';
 import { RefreshCcw } from 'lucide-react-native';
+import { Container } from '@/components/Container';
 
 type DeckScreenProps = {};
 
@@ -98,33 +99,35 @@ export function DeckDetailScreen(props: DeckScreenProps) {
   const solutionOpen = !questionOpen;
 
   return (
-    <View
-      style={{ flex: 1, padding: 16, alignItems: 'center', gap: 16, marginTop: 48 }}
-      from={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1000, type: 'timing' }}>
-      <Text variant="h2">{deck?.name || 'Deck Detail'}</Text>
-      <Column
-        style={{
-          gap: 16,
-          position: 'relative',
-          height: 400,
-          flex: 1,
-          alignItems: 'center',
-          backgroundColor: 'red',
-        }}>
-        <QuestionCard
-          open={questionOpen}
-          content={firstCard}
-          close={() => questionOpen$.set(false)}
-        />
-        <SolutionCard
-          open={solutionOpen}
-          content={firstCard}
-          close={() => questionOpen$.set(true)}
-        />
-      </Column>
-    </View>
+    <Container>
+      <View
+        style={{ flex: 1, padding: 16, alignItems: 'center', gap: 16, marginTop: 48 }}
+        from={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1000, type: 'timing' }}>
+        <Text variant="h2">{deck?.name || 'Deck Detail'}</Text>
+        <Column
+          style={{
+            gap: 16,
+            position: 'relative',
+            height: 400,
+            flex: 1,
+            alignItems: 'center',
+            backgroundColor: 'red',
+          }}>
+          <QuestionCard
+            open={questionOpen}
+            content={firstCard}
+            close={() => questionOpen$.set(false)}
+          />
+          <SolutionCard
+            open={solutionOpen}
+            content={firstCard}
+            close={() => questionOpen$.set(true)}
+          />
+        </Column>
+      </View>
+    </Container>
   );
 }
 

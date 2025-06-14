@@ -12,33 +12,37 @@ import { FAQSection } from './components/FAQSection';
 import { CallToActionSection } from './components/CallToActionSection';
 import { FooterSection } from './components/FooterSection';
 import { Column } from '@/components/Column';
+import { Container } from '@/components/Container';
 
 export function LandingScreen() {
   const { theme } = useTheme();
 
   return (
-    <ScrollView
-      style={[flex]}
-      contentContainerStyle={[{ backgroundColor: theme.colors.background }]}>
-      <Column
-        style={[
-          mxAuto,
-          gap64,
-          {
-            maxWidth: 1200,
-          },
-        ]}>
-        <HeaderSection />
-        <HeroSection />
-        <WelcomeSection />
-        <TestimoninalSection />
-        <FeaturesSection />
-        <HowItWorksSection />
-        <SuccessSection />
-        <FAQSection />
-        <CallToActionSection />
-      </Column>
-      <FooterSection />
-    </ScrollView>
+    <Container>
+      <ScrollView
+        style={[flex]}
+        contentContainerStyle={[{ backgroundColor: theme.colors.background }]}>
+        <Column
+          style={[
+            mxAuto,
+            gap64,
+            {
+              width: '100%',
+              maxWidth: 1200,
+            },
+          ]}>
+          <HeaderSection />
+          <HeroSection />
+          <WelcomeSection />
+          <TestimoninalSection />
+          <FeaturesSection />
+          <HowItWorksSection />
+          <SuccessSection />
+          <FAQSection />
+          <CallToActionSection />
+        </Column>
+        <FooterSection />
+      </ScrollView>
+    </Container>
   );
 }
