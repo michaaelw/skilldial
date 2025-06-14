@@ -18,7 +18,7 @@ export function LandingScreen() {
   const { theme } = useTheme();
 
   return (
-    <Container>
+    <Container showHeader={false}>
       <ScrollView
         style={[flex]}
         contentContainerStyle={[{ backgroundColor: theme.colors.background }]}>

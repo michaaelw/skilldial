@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     padding: 16,
-    borderBottomWidth: 1,
     borderColor: '#ddd',
   },
   name: {
