@@ -29,7 +29,12 @@ export const ThemeContext = createContext<ThemeContextType>({
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const colorScheme = useColorScheme();
   const [currentScheme, setCurrentScheme] = useState<Schemes>('dark');
-  const [media, setMedia] = useState<Partial<Record<keyof Theme['breakpoints'], boolean>>>({});
+  const [media, setMedia] = useState<Record<keyof Theme['breakpoints'], boolean>>({
+    sm: true,
+    md: false,
+    lg: false,
+    xl: false,
+  });
   const dimensions = useWindowDimensions();
 
   const theme = currentScheme === 'dark' ? darkTheme : lightTheme;

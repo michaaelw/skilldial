@@ -1,4 +1,4 @@
-import { DeckScreen } from '@/features/deck/DeckScreen';
+import { DeckDetailScreen } from '@/features/deck/DeckDetailScreen';
 import * as deckService from '@/features/deck/DeckService';
 
 export async function generateStaticParams(): Promise<Record<string, string>[]> {
@@ -8,4 +8,4 @@ export async function generateStaticParams(): Promise<Record<string, string>[]> 
   return decks?.map((deck) => ({ slug: deck.slug }));
 }
 
-export default DeckScreen;
+export default DeckDetailScreen;

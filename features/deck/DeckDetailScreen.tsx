@@ -85,7 +85,7 @@ function SolutionCard({ open, content, close }: CardProps) {
   );
 }
 
-export function DeckScreen(props: DeckScreenProps) {
+export function DeckDetailScreen(props: DeckScreenProps) {
   const { media, theme } = useTheme();
   const params = useLocalSearchParams<{ slug: string }>();
 
