@@ -23,10 +23,8 @@ export function LandingScreen() {
       <Column
         style={[
           mxAuto,
-          flex,
           gap64,
           {
-            width: '100%',
             maxWidth: 1200,
           },
         ]}>
