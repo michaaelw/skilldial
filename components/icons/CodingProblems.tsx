@@ -1,5 +1,4 @@
-import * as React from 'react';
-import Svg, { Path, Mask } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 
 interface IconProps {
   color?: string;
@@ -13,20 +12,6 @@ export function CodingProblems({ size = 116, color }: IconProps) {
         d="M58 0c32.032 0 58 25.968 58 58a57.79 57.79 0 01-5.397 24.463c-13.646 2.758-30.29 7.5-41.332 15.378-13.758 9.814-34.893 7.592-48.45 4.677C8.095 91.878 0 75.885 0 58 0 25.968 25.968 0 58 0z"
         fill="#fff"
       />
-      <Mask
-        style={{
-          maskType: 'luminance',
-        }}
-        maskUnits="userSpaceOnUse"
-        x={0}
-        y={0}
-        width={116}
-        height={105}>
-        <Path
-          d="M58 0c32.032 0 58 25.968 58 58a57.79 57.79 0 01-5.397 24.463c-13.646 2.758-30.29 7.5-41.332 15.378-13.758 9.814-34.893 7.592-48.45 4.677C8.095 91.878 0 75.885 0 58 0 25.968 25.968 0 58 0z"
-          fill="#fff"
-        />
-      </Mask>
       <Path
         d="M49.295 63h-11.59c-.942 0-1.705.897-1.705 2 0 1.106.765 2 1.705 2h11.59c.942 0 1.705-.897 1.705-2s-.76-2-1.705-2zM49.39 71H33.61c-.89 0-1.61.894-1.61 2 0 1.106.722 2 1.61 2h15.78c.89 0 1.61-.897 1.61-2 0-1.108-.718-2-1.61-2z"
         fill="#2B2B2B"

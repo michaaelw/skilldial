@@ -9,6 +9,7 @@ import { View } from 'react-native';
 
 export function HowItWorksSection() {
   const { theme, media } = useTheme();
+
   return (
     <Column style={[flex, gap16]}>
       <Text variant="h2" style={[textCenter]}>
