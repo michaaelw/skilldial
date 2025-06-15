@@ -1,17 +1,17 @@
-import { TextProps, Text as RNText, TextStyle, StyleSheet } from 'react-native'
-import { useTheme } from './ThemeProvider'
+import { TextProps, Text as RNText, TextStyle, StyleSheet } from 'react-native';
+import { useTheme } from './ThemeProvider';
 
 type Props = TextProps & {
-  variant?: keyof typeof variantStyles
-}
+  variant?: keyof typeof variantStyles;
+};
 
 export function Text({ style, variant = 'body', ...props }: Props) {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
 
   const defaultStyle: TextStyle = {
     color: theme.colors.typography,
-  }
-  return <RNText style={[defaultStyle, variantStyles[variant], style]} {...props} />
+  };
+  return <RNText style={[defaultStyle, variantStyles[variant], style]} {...props} />;
 }
 
 const variantStyles = StyleSheet.create({
@@ -34,4 +34,7 @@ const variantStyles = StyleSheet.create({
   body: {
     fontSize: 16,
   },
-})
+  error: {
+    color: 'red',
+  },
+});

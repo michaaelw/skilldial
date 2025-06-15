@@ -15,6 +15,7 @@ import { Text } from '@/components/Text';
 import { Row } from '@/components/Row';
 import { Input } from '@/components/Input';
 import { CheckboxWithLabel } from '@/components/CheckboxWithLabel';
+import { CreateAccountForm } from './components/CreateAccountForm';
 
 export function CreateAccountScreen() {
   const { user } = useAuth();
@@ -28,43 +29,7 @@ export function CreateAccountScreen() {
   }));
   return (
     <Container>
-      <Column style={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
-        <Text variant="h1" style={[textCenter]}>
-          Create an Account
-        </Text>
-        <Text style={[textCenter]}>Start your 30-day free trial.</Text>
-
-        <Row style={[{ gap: 8 }]}>
-          <Input placeholder="First name"></Input>
-          <Input placeholder="Last name"></Input>
-        </Row>
-
-        <Row>
-          <Input placeholder="Email"></Input>
-        </Row>
-
-        <Row>
-          <Input placeholder="Email"></Input>
-        </Row>
-
-        <Row>
-          <Input placeholder="Confirm password"></Input>
-        </Row>
-
-        <Row>
-          <CheckboxWithLabel label="Subscribe to our weekly newsletter" />
-        </Row>
-
-        <Button title="Signup"></Button>
-
-        <Link href="/login" style={[flex]}>
-          <Row style={[flex, wMax, justifyCenter]}>
-            <Text>
-              Already have an accont? <Text style={[fontBold]}>Login</Text>
-            </Text>
-          </Row>
-        </Link>
-      </Column>
+      <CreateAccountForm />
     </Container>
   );
 }

@@ -8,6 +8,7 @@ import {
   TextStyle,
   Platform,
 } from 'react-native';
+import { useTheme } from './ThemeProvider';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
 
@@ -20,6 +21,7 @@ type InputProps = {
 export const Input = forwardRef<TextInput, InputProps>(
   ({ leftIcon, rightIcon, variant = 'primary', style, ...inputProps }, ref) => {
     const variantStyle = getVariantStyle(variant);
+    const { theme } = useTheme();
 
     return (
       <View style={[styles.container, { flex: Platform.OS === 'web' ? 1 : 1 }]}>
@@ -27,8 +29,8 @@ export const Input = forwardRef<TextInput, InputProps>(
         <TextInput
           ref={ref}
           {...inputProps}
-          style={[styles.input, variantStyle, style]}
-          placeholderTextColor={'#333'}
+          style={[styles.input, variantStyle, { color: theme.colors.typography }, style]}
+          placeholderTextColor={'#ccc'}
         />
         {rightIcon && <View style={styles.icon}>{rightIcon}</View>}
       </View>
@@ -47,7 +49,6 @@ const styles = StyleSheet.create({
 
   input: {
     fontSize: 16,
-    color: '#000',
     outlineColor: 'deepskyblue',
     borderRadius: 8,
     paddingHorizontal: 12,

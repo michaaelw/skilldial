@@ -1,4 +1,4 @@
-import { supabase } from '@/utils/supabase';
+import { supabase } from "@/utils/supabase";
 
 export async function loginInAnonymously() {
   const { data, error } = await supabase.auth.signInAnonymously();
@@ -16,4 +16,14 @@ export async function logout() {
   if (error) {
     throw error;
   }
+}
+
+type CreateAccountInput = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
+
+export async function createAccount(input: CreateAccountInput) {
 }
