@@ -10,8 +10,11 @@ import { GoogleIcon } from '@/components/icons/Google';
 import { Mail } from 'lucide-react-native';
 import { useAuthPresenter } from './AuthPresenter';
 import { useAuth } from './AuthContext';
-import { gap16, gap8, p8, textCenter } from '@/styles';
+import { flex, fontBold, gap16, gap8, justifyCenter, mxAuto, p8, textCenter, wMax } from '@/styles';
 import { Text } from '@/components/Text';
+import { Row } from '@/components/Row';
+import { Input } from '@/components/Input';
+import { CheckboxWithLabel } from '@/components/CheckboxWithLabel';
 
 export function LoginScreen() {
   const { user } = useAuth();
@@ -27,24 +30,33 @@ export function LoginScreen() {
   }));
   return (
     <Container>
-      <Column style={[gap16, p8]}>
-        <Text variant="h1"> Get Started</Text>
-        <Text>Create an account or login to keep your cards safe and access all features.</Text>
-        <Button
-          icon={<GoogleIcon color="red" />}
-          variant="dark"
-          title="Continue with Google"></Button>
-        <Button
-          icon={<AppleIcon color="white" />}
-          variant="dark"
-          title="Continue with Apple"></Button>
-        <Button icon={<Mail color="white" />} variant="dark" title="Continue with Email"></Button>
-        <Text style={[textCenter]}>Or</Text>
-        <Button variant="ghost" title="Continue as guest" onPress={loginInAnonymously}></Button>
-
-        <Text style={[textCenter]}>
-          By signing up you agree to our Terms of Service and Privacy Policy
+      <Column style={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
+        <Text variant="h1" style={[textCenter]}>
+          Login to your account
         </Text>
+        <Text style={[textCenter]}>Welcome back. Please enter your details.</Text>
+
+        <Row>
+          <Input placeholder="Email"></Input>
+        </Row>
+
+        <Row>
+          <Input placeholder="Password"></Input>
+        </Row>
+
+        <Row>
+          <CheckboxWithLabel label="Remember for 30 days" />
+        </Row>
+
+        <Button title="Sign in"></Button>
+
+        <Link href="/create-account" style={[flex]}>
+          <Row style={[flex, wMax, justifyCenter]}>
+            <Text>
+              Don't have an account? <Text style={[fontBold]}>Signup</Text>
+            </Text>
+          </Row>
+        </Link>
       </Column>
     </Container>
   );

@@ -24,7 +24,12 @@ export const Input = forwardRef<TextInput, InputProps>(
     return (
       <View style={[styles.container, { flex: Platform.OS === 'web' ? 1 : 1 }]}>
         {leftIcon && <View style={styles.icon}>{leftIcon}</View>}
-        <TextInput ref={ref} {...inputProps} style={[styles.input, variantStyle, style]} />
+        <TextInput
+          ref={ref}
+          {...inputProps}
+          style={[styles.input, variantStyle, style]}
+          placeholderTextColor={'#333'}
+        />
         {rightIcon && <View style={styles.icon}>{rightIcon}</View>}
       </View>
     );

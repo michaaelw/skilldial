@@ -10,7 +10,7 @@ import { GoogleIcon } from '@/components/icons/Google';
 import { Mail } from 'lucide-react-native';
 import { useAuthPresenter } from './AuthPresenter';
 import { useAuth } from './AuthContext';
-import { fontBold, gap16, gap8, mxAuto, p8, textCenter, wMax } from '@/styles';
+import { flex, fontBold, gap16, gap8, justifyCenter, mxAuto, p8, textCenter, wMax } from '@/styles';
 import { Text } from '@/components/Text';
 import { Row } from '@/components/Row';
 import { Input } from '@/components/Input';
@@ -57,10 +57,12 @@ export function CreateAccountScreen() {
 
         <Button title="Signup"></Button>
 
-        <Link href="/login">
-          <Text style={[textCenter]}>
-            Already have an accont? <Text style={[fontBold]}>Login</Text>
-          </Text>
+        <Link href="/login" style={[flex]}>
+          <Row style={[flex, wMax, justifyCenter]}>
+            <Text>
+              Already have an accont? <Text style={[fontBold]}>Login</Text>
+            </Text>
+          </Row>
         </Link>
       </Column>
     </Container>
