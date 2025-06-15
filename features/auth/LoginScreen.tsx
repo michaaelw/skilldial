@@ -16,10 +16,6 @@ import { Text } from '@/components/Text';
 export function LoginScreen() {
   const { user } = useAuth();
 
-  if (user) {
-    return <Redirect href={'/'} />;
-  }
-
   const isMounted$ = useIsMounted();
   const isMounted = useSelector(isMounted$);
 

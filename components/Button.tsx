@@ -82,7 +82,7 @@ function getButtonVariantStyle(variant: Variants, theme: Theme): ViewStyle {
   switch (variant) {
     case 'primary':
       return {
-        backgroundColor: theme.colors.green,
+        backgroundColor: theme.colors.blue,
       };
     case 'secondary':
       return {

@@ -1,6 +1,6 @@
 const sharedColors = {
   azureRadiance: "#007AFF",
-  blue: "#0095cc",
+  blue: "#1278F1",
   limedSpruce: "#38434D",
   cornflowerBlue: "#6366F1",
   astral: "#2E78B7",

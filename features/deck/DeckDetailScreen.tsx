@@ -11,6 +11,7 @@ import { Button } from '@/components/Button';
 import { Card } from '@/types';
 import { RefreshCcw } from 'lucide-react-native';
 import { Container } from '@/components/Container';
+import { Row } from '@/components/Row';
 
 type DeckScreenProps = {};
 
@@ -90,9 +91,9 @@ export function DeckDetailScreen(props: DeckScreenProps) {
   const { media, theme } = useTheme();
   const params = useLocalSearchParams<{ slug: string }>();
 
-  const { deck } = useDeck({ slug: params?.slug });
+  const { deck, cardIndex, nextCard } = useDeck({ slug: params?.slug });
 
-  const firstCard = deck?.cards?.[0];
+  const card = deck?.cards?.[cardIndex];
   const questionOpen$ = useObservable(true);
   const questionOpen = useSelector(questionOpen$);
 
@@ -115,16 +116,11 @@ export function DeckDetailScreen(props: DeckScreenProps) {
             alignItems: 'center',
             backgroundColor: 'red',
           }}>
-          <QuestionCard
-            open={questionOpen}
-            content={firstCard}
-            close={() => questionOpen$.set(false)}
-          />
-          <SolutionCard
-            open={solutionOpen}
-            content={firstCard}
-            close={() => questionOpen$.set(true)}
-          />
+          <QuestionCard open={questionOpen} content={card} close={() => questionOpen$.set(false)} />
+          <SolutionCard open={solutionOpen} content={card} close={() => questionOpen$.set(true)} />
+        </Column>
+        <Column>
+          <Button title="Next" onPress={nextCard}></Button>
         </Column>
       </View>
     </Container>

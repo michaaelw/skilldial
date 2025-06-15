@@ -1,4 +1,4 @@
-import { useSelector } from "@legendapp/state/react";
+import { useObservable, useSelector } from "@legendapp/state/react";
 import * as deckService from "./DeckService";
 import { deckStore$ } from "./DeckStore";
 import { useEffect } from "react";
@@ -29,6 +29,12 @@ export function useDecks() {
 export function useDeck({ slug }: { slug: string }) {
   const decks = useSelector(deckStore$.decks);
   const deck = useSelector(deckStore$.deck);
+  const cardIndex$ = useObservable(0);
+  const cardIndex = useSelector(cardIndex$);
+
+  function nextCard() {
+    cardIndex$.set((current) => (current + 1) % 3);
+  }
 
   function fetchDeckBySlug(slug: string) {
     deckService.getDeckBySlug(slug).then((res) => {
@@ -43,6 +49,8 @@ export function useDeck({ slug }: { slug: string }) {
   }, [slug]);
 
   return {
+    cardIndex,
+    nextCard,
     fetchDeckBySlug,
     deck: deck,
   };

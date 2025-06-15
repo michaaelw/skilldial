@@ -29,7 +29,9 @@ export function HeaderSection() {
       </Row>
       <Row style={[gap8]}>
         <Button variant="ghost" title="Login"></Button>
-        <Button title="Sign Up" variant="outline"></Button>
+        <Link href="/create-account">
+          <Button title="Sign Up" variant="outline"></Button>
+        </Link>
       </Row>
     </View>
   );
