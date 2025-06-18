@@ -26,4 +26,14 @@ type CreateAccountInput = {
 };
 
 export async function createAccount(input: CreateAccountInput) {
+  return supabase.auth.signUp({
+    email: input.email,
+    password: input.password,
+    options: {
+      data: {
+        firstName: input.firstName,
+        lastName: input.lastName,
+      },
+    },
+  });
 }

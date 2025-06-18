@@ -9,11 +9,13 @@ import { useObservable, useObserve, useSelector } from '@legendapp/state/react';
 import { Link } from 'expo-router';
 
 import { z } from 'zod/v4';
+import { useAuthPresenter } from '../AuthPresenter';
 
 export function CreateAccountForm() {
-  const formStore$ = useFormStore();
+  const formStore$ = useCreateAccountFormStore();
   const touched = useSelector(formStore$.touched);
   const errors = useSelector(formStore$.errors);
+  const { handleCreateAccount } = useAuthPresenter();
 
   return (
     <Column style={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
@@ -68,12 +70,12 @@ export function CreateAccountForm() {
         <CheckboxWithLabel label="Subscribe to our weekly newsletter" />
       </Row>
 
-      <Button title="Signup"></Button>
+      <Button title="Signup" onPress={handleCreateAccount}></Button>
 
       <Link href="/login" style={[flex]}>
         <Row style={[flex, wMax, justifyCenter]}>
           <Text>
-            Already have an accont? <Text style={[fontBold]}>Login</Text>
+            Already have an account? <Text style={[fontBold]}>Login</Text>
           </Text>
         </Row>
       </Link>
@@ -100,23 +102,23 @@ type SignupFormStore = FormType & {
   touched: { [K in keyof FormType]: boolean };
 };
 
-function useFormStore() {
-  const formStore$ = useObservable<SignupFormStore>({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    firstName: '',
-    lastName: '',
-    errors: { email: null, password: null, firstName: null, lastName: null, confirmPassword: null },
-    touched: {
-      email: false,
-      password: false,
-      firstName: false,
-      lastName: false,
-      confirmPassword: false,
-    },
-  });
+const formStore$ = useObservable<SignupFormStore>({
+  email: '',
+  password: '',
+  confirmPassword: '',
+  firstName: '',
+  lastName: '',
+  errors: { email: null, password: null, firstName: null, lastName: null, confirmPassword: null },
+  touched: {
+    email: false,
+    password: false,
+    firstName: false,
+    lastName: false,
+    confirmPassword: false,
+  },
+});
 
+export function useCreateAccountFormStore() {
   function validateForm() {
     const email = formStore$.email.get();
     const password = formStore$.password.get();
