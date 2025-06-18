@@ -5,7 +5,7 @@ import { Text } from '@/components/Text';
 import { useTheme } from '@/components/ThemeProvider';
 import { alignCenter, gap8 } from '@/styles';
 import { Show } from '@legendapp/state/react';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 export function HeaderSection() {
@@ -28,10 +28,12 @@ export function HeaderSection() {
         </Show>
       </Row>
       <Row style={[gap8]}>
-        <Button variant="ghost" title="Login"></Button>
-        <Link href="/create-account">
-          <Button title="Sign Up" variant="outline"></Button>
-        </Link>
+        <Button variant="ghost" title="Login" onPress={() => router.push('/login')}></Button>
+
+        <Button
+          title="Sign Up"
+          variant="outline"
+          onPress={() => router.push('/create-account')}></Button>
       </Row>
     </View>
   );

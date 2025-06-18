@@ -1,6 +1,7 @@
-const isDev = process.env.APP_VARIANT === 'dev';
+//require('@dotenvx/dotenvx').config({ path: isDev ? '.env.development' : '.env.production' });
 
-require('@dotenvx/dotenvx').config({ path: isDev ? '.env.development' : '.env.production' });
+const isDev = process.env.EXPO_PUBLIC_APP_VARIANT === 'dev';
+console.log({ isDev });
 
 module.exports = ({ config }) => {
   return {
@@ -9,7 +10,7 @@ module.exports = ({ config }) => {
     slug: isDev ? 'skill-dial-dev' : 'skill-dial',
     ios: {
       ...config.ios,
-      bundleIdentifier: isDev ? 'com.skilldial.app.dev' : 'com.skilldial.app',
+      bundleIdentifier: isDev ? 'com.skilldial.app.dev3' : 'com.skilldial.app',
     },
     android: {
       ...config.android,

@@ -30,12 +30,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.skilldial.app.dev",
+      "bundleIdentifier": "com.skilldial.app.dev3",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }

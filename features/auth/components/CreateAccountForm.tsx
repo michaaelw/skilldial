@@ -23,6 +23,7 @@ export function CreateAccountForm() {
       <Text style={[textCenter]}>Start your 30-day free trial.</Text>
       <Column style={[gap8]}>
         {touched.firstName && <Text variant="error">{errors.firstName}</Text>}
+
         <Input
           placeholder="First name"
           onChangeText={formStore$.firstName.set}

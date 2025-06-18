@@ -24,15 +24,19 @@ export const Input = forwardRef<TextInput, InputProps>(
     const { theme } = useTheme();
 
     return (
-      <View style={[styles.container, { flex: Platform.OS === 'web' ? 1 : 1 }]}>
-        {leftIcon && <View style={styles.icon}>{leftIcon}</View>}
-        <TextInput
-          ref={ref}
-          {...inputProps}
-          style={[styles.input, variantStyle, { color: theme.colors.typography }, style]}
-          placeholderTextColor={'#ccc'}
-        />
-        {rightIcon && <View style={styles.icon}>{rightIcon}</View>}
+      <View style={{ height: 48 }}>
+        <View style={[styles.container, { flex: Platform.OS === 'web' ? 1 : 1 }]}>
+          {leftIcon && <View style={styles.icon}>{leftIcon}</View>}
+
+          <TextInput
+            ref={ref}
+            {...inputProps}
+            style={[styles.input, variantStyle, { color: theme.colors.typography }, style]}
+            placeholderTextColor={'#ccc'}
+          />
+
+          {rightIcon && <View style={styles.icon}>{rightIcon}</View>}
+        </View>
       </View>
     );
   }
