@@ -9,15 +9,16 @@ import { useObservable, useObserve, useSelector } from '@legendapp/state/react';
 import { Link } from 'expo-router';
 
 import { z } from 'zod/v4';
+import { useAuthPresenter } from '../AuthPresenter';
 
 export function LoginForm() {
-  const formStore$ = useFormStore();
+  const formStore$ = useLoginFormStore();
   const emailError = useSelector(formStore$.errors.email);
   const passwordError = useSelector(formStore$.errors.password);
   const emailTouched = useSelector(formStore$.touched.email);
   const passwordTouched = useSelector(formStore$.touched.password);
 
-  const handleLogin = () => {};
+  const { handleLogin } = useAuthPresenter();
 
   return (
     <Column style={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
@@ -70,14 +71,14 @@ type LoginFormStore = FormType & {
   touched: { [K in keyof FormType]: boolean };
 };
 
-function useFormStore() {
-  const formStore$ = useObservable<LoginFormStore>({
-    email: '',
-    password: '',
-    errors: { email: null, password: null },
-    touched: { email: false, password: false },
-  });
+const formStore$ = useObservable<LoginFormStore>({
+  email: '',
+  password: '',
+  errors: { email: null, password: null },
+  touched: { email: false, password: false },
+});
 
+export function useLoginFormStore() {
   function validateForm() {
     const email = formStore$.email.get();
     const password = formStore$.password.get();

@@ -37,3 +37,15 @@ export async function createAccount(input: CreateAccountInput) {
     },
   });
 }
+
+type LoginInput = {
+  email: string;
+  password: string;
+};
+
+export async function login(input: LoginInput) {
+  return supabase.auth.signInWithPassword({
+    email: input.email,
+    password: input.password,
+  });
+}

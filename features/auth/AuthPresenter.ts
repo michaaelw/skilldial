@@ -4,10 +4,13 @@ import { authStore$ } from "./AuthStore";
 
 import * as authService from "./AuthService";
 import { useCreateAccountFormStore } from "./components/CreateAccountForm";
+import { router } from "expo-router";
+import { useLoginFormStore } from "./components/LoginForm";
 
 export function useAuthPresenter() {
   const user = useSelector(authStore$.user);
-  const formStore$ = useCreateAccountFormStore();
+  const createAccountFormStore$ = useCreateAccountFormStore();
+  const loginFormStore$ = useLoginFormStore();
 
   const logout = () => {
     authService.logout();
@@ -25,7 +28,7 @@ export function useAuthPresenter() {
   }
 
   function handleCreateAccount() {
-    const form = formStore$.get();
+    const form = createAccountFormStore$.get();
 
     authService.createAccount({
       firstName: form.firstName,
@@ -34,6 +37,22 @@ export function useAuthPresenter() {
       password: form?.password,
     }).then((res) => {
       console.log("account created successfully ", res);
+    });
+  }
+
+  function handleLogin() {
+    const form = loginFormStore$.get();
+
+    console.log("form ", form);
+
+    authService.login({
+      email: form?.email,
+      password: form?.password,
+    }).then((res) => {
+      console.log("login completed successfully ", res);
+      if (!res.error) {
+        router.replace("/");
+      }
     });
   }
 
@@ -49,8 +68,8 @@ export function useAuthPresenter() {
   }
 
   return {
-    createAccount: authService.createAccount,
     handleCreateAccount,
+    handleLogin,
     user,
     logout,
     loginInAnonymously,

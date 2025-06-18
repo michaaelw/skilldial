@@ -3,6 +3,7 @@ import { Cube } from '@/components/icons/Cube';
 import { Row } from '@/components/Row';
 import { Text } from '@/components/Text';
 import { useTheme } from '@/components/ThemeProvider';
+import { useAuth } from '@/features/auth/AuthContext';
 import { alignCenter, gap8 } from '@/styles';
 import { Show } from '@legendapp/state/react';
 import { Link, router } from 'expo-router';
@@ -10,6 +11,8 @@ import { StyleSheet, View } from 'react-native';
 
 export function HeaderSection() {
   const { theme, media } = useTheme();
+  const { user } = useAuth();
+
   return (
     <View style={styles.header}>
       <Row style={[gap8, alignCenter]}>
@@ -28,12 +31,14 @@ export function HeaderSection() {
         </Show>
       </Row>
       <Row style={[gap8]}>
-        <Button variant="ghost" title="Login" onPress={() => router.push('/login')}></Button>
+        <Show if={!user} else={<Text>{user?.email}</Text>}>
+          <Button variant="ghost" title="Login" onPress={() => router.push('/login')}></Button>
 
-        <Button
-          title="Sign Up"
-          variant="outline"
-          onPress={() => router.push('/create-account')}></Button>
+          <Button
+            title="Sign Up"
+            variant="outline"
+            onPress={() => router.push('/create-account')}></Button>
+        </Show>
       </Row>
     </View>
   );
