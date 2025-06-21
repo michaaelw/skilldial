@@ -13,9 +13,11 @@ import { CallToActionSection } from './components/CallToActionSection';
 import { FooterSection } from './components/FooterSection';
 import { Column } from '@/components/Column';
 import { Container } from '@/components/Container';
+import { usePathname } from 'expo-router';
 
 export function LandingScreen() {
   const { theme } = useTheme();
+  const pathname = usePathname();
 
   return (
     <Container showHeader={false}>

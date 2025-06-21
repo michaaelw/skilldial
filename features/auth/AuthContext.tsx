@@ -24,6 +24,8 @@ export const useAuth = () => {
 export function AuthProvider({ children }: PropsWithChildren) {
   const { user, handleAuthStateChange, logout } = useAuthPresenter();
 
+  console.log('user ', user);
+
   useEffect(() => {
     const { data: subscription } = supabase.auth.onAuthStateChange(handleAuthStateChange);
     return () => {

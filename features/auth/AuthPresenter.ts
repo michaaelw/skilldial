@@ -3,9 +3,9 @@ import { AuthChangeEvent, Session } from "@supabase/supabase-js";
 import { authStore$ } from "./AuthStore";
 
 import * as authService from "./AuthService";
-import { useCreateAccountFormStore } from "./components/CreateAccountForm";
 import { router } from "expo-router";
-import { useLoginFormStore } from "./components/LoginForm";
+import { useLoginFormStore } from "./components/LoginForm/LoginFormStore";
+import { useCreateAccountFormStore } from "./components/CreateAccountForm/CreateAccountFormStore";
 
 export function useAuthPresenter() {
   const user = useSelector(authStore$.user);
@@ -36,20 +36,20 @@ export function useAuthPresenter() {
       email: form?.email,
       password: form?.password,
     }).then((res) => {
-      console.log("account created successfully ", res);
+      console.log("create account result ", res);
+      if (!res.error) {
+        router.replace("/");
+      }
     });
   }
 
   function handleLogin() {
     const form = loginFormStore$.get();
 
-    console.log("form ", form);
-
     authService.login({
       email: form?.email,
       password: form?.password,
     }).then((res) => {
-      console.log("login completed successfully ", res);
       if (!res.error) {
         router.replace("/");
       }
