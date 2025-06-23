@@ -5,11 +5,13 @@ import { useAuthPresenter } from './AuthPresenter';
 
 type AuthContextType = {
   user: User | null;
+  isLoading: boolean;
   logout: () => void;
 };
 
 const AuthContext = React.createContext<AuthContextType>({
   user: null,
+  isLoading: true,
   logout: () => {},
 });
 
@@ -22,9 +24,7 @@ export const useAuth = () => {
 };
 
 export function AuthProvider({ children }: PropsWithChildren) {
-  const { user, handleAuthStateChange, logout } = useAuthPresenter();
-
-  console.log('user ', user);
+  const { user, handleAuthStateChange, logout, isLoading } = useAuthPresenter();
 
   useEffect(() => {
     const { data: subscription } = supabase.auth.onAuthStateChange(handleAuthStateChange);
@@ -33,5 +33,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     };
   }, []);
 
-  return <AuthContext.Provider value={{ user, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, logout, isLoading }}>{children}</AuthContext.Provider>
+  );
 }

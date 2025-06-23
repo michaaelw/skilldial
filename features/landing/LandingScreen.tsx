@@ -13,11 +13,18 @@ import { CallToActionSection } from './components/CallToActionSection';
 import { FooterSection } from './components/FooterSection';
 import { Column } from '@/components/Column';
 import { Container } from '@/components/Container';
-import { usePathname } from 'expo-router';
+import { Redirect } from 'expo-router';
+import { useAuth } from '../auth/AuthContext';
+import { Loader2 } from 'lucide-react-native';
 
 export function LandingScreen() {
   const { theme } = useTheme();
-  const pathname = usePathname();
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) return <Loader2 />;
+  if (user) {
+    return <Redirect href={'/(main)'} />;
+  }
 
   return (
     <Container showHeader={false}>

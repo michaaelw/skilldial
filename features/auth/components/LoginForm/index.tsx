@@ -17,6 +17,7 @@ export function LoginForm() {
   const passwordError = useSelector(formStore$.errors.password);
   const emailTouched = useSelector(formStore$.touched.email);
   const passwordTouched = useSelector(formStore$.touched.password);
+  const serverError = useSelector(formStore$.serverError);
 
   const { handleLogin } = useAuthPresenter();
 
@@ -26,7 +27,7 @@ export function LoginForm() {
         Login to your account
       </Text>
       <Text style={[textCenter]}>Welcome back. Please enter your details.</Text>
-
+      {Boolean(serverError) && <Text variant="error">{serverError}</Text>}
       <Column style={[gap8]}>
         {emailTouched && <Text variant="error">{emailError}</Text>}
         <Input

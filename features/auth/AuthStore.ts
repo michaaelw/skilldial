@@ -1,9 +1,13 @@
-import { observable } from '@legendapp/state';
-import { User } from '@supabase/supabase-js';
+import { observable } from "@legendapp/state";
+import { User } from "@supabase/supabase-js";
 
 type AuthStore = {
+  isLoading: boolean;
   user: User | null;
   error?: string;
 };
 
-export const authStore$ = observable<AuthStore>({ user: null });
+export const authStore$ = observable<AuthStore>({
+  user: null,
+  isLoading: true,
+});

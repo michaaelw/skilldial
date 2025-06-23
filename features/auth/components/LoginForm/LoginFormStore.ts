@@ -12,6 +12,7 @@ type FormType = z.infer<typeof loginSchema>;
 type LoginFormStore = FormType & {
   errors: { [K in keyof FormType]: string | null };
   touched: { [K in keyof FormType]: boolean };
+  serverError: string | null;
 };
 
 const formStore$ = useObservable<LoginFormStore>({
@@ -19,6 +20,7 @@ const formStore$ = useObservable<LoginFormStore>({
   password: "",
   errors: { email: null, password: null },
   touched: { email: false, password: false },
+  serverError: null,
 });
 
 export function useLoginFormStore() {

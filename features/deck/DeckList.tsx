@@ -1,5 +1,7 @@
+import { Column } from '@/components/Column';
 import { Text } from '@/components/Text';
 import { useTheme } from '@/components/ThemeProvider';
+import { alignCenter, gap16 } from '@/styles';
 import { DeckWithCardCount } from '@/types';
 import { pluralize } from '@/utils/pluralise';
 import { Link } from 'expo-router';
@@ -24,7 +26,12 @@ export function DeckList({ decks }: DeckListProps) {
 
   return (
     <FlatList
-      ListHeaderComponent={<Text variant="h1">Decks</Text>}
+      ListHeaderComponent={
+        <Column style={[alignCenter, gap16]}>
+          <Text variant="h1">Welcome to Skill Dial</Text>
+          <Text variant="h2">Decks</Text>
+        </Column>
+      }
       key={media.md ? 'large' : 'small'}
       numColumns={media.md ? 3 : 1}
       data={decks}

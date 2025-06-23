@@ -6,9 +6,11 @@ import * as authService from "./AuthService";
 import { router } from "expo-router";
 import { useLoginFormStore } from "./components/LoginForm/LoginFormStore";
 import { useCreateAccountFormStore } from "./components/CreateAccountForm/CreateAccountFormStore";
+import * as SplashScreen from "expo-splash-screen";
 
 export function useAuthPresenter() {
   const user = useSelector(authStore$.user);
+  const isLoading = useSelector(authStore$.isLoading);
   const createAccountFormStore$ = useCreateAccountFormStore();
   const loginFormStore$ = useLoginFormStore();
 
@@ -25,6 +27,9 @@ export function useAuthPresenter() {
     } else {
       authStore$.user.set(null);
     }
+
+    authStore$.isLoading.set(false);
+    SplashScreen.hide();
   }
 
   function handleCreateAccount() {
@@ -52,6 +57,8 @@ export function useAuthPresenter() {
     }).then((res) => {
       if (!res.error) {
         router.replace("/");
+      } else {
+        loginFormStore$.serverError.set(res.error.message);
       }
     });
   }
@@ -72,6 +79,7 @@ export function useAuthPresenter() {
     handleLogin,
     user,
     logout,
+    isLoading,
     loginInAnonymously,
     handleAuthStateChange,
   };
