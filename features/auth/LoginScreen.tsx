@@ -16,6 +16,7 @@ import { Row } from '@/components/Row';
 import { Button } from '@/components/Button';
 import { TabBar } from '@/components/TabBar';
 import { CreateAccountForm } from './components/CreateAccountForm';
+import { router } from 'expo-router';
 
 export function LoginScreen() {
   const { user } = useAuth();
@@ -37,13 +38,18 @@ export function LoginScreen() {
     <Container showHeader={false}>
       <View
         style={[
+          flex,
+          gap8,
           p16,
           { flexDirection: media?.md ? 'row' : 'column', maxWidth: 1000 },
           wMax,
           mxAuto,
         ]}>
-        <Column style={[flex, gap16]}>
-          <Logo />
+        <Column style={[media.md && flex, gap16]}>
+          <Image
+            source={require('@/assets/skilldial-small.png')}
+            style={{ width: 50, height: 50 }}
+          />
           <Text variant="h2">Sign In</Text>
           <Text>Use your SkillDial account</Text>
         </Column>
@@ -51,13 +57,13 @@ export function LoginScreen() {
         <Column style={[flex]}>
           <TabBar
             tabs={[
-              { key: 'signup', label: 'Sign Up' },
-              { key: 'signin', label: 'Sign In' },
+              { key: '/create-account', label: 'Sign Up' },
+              { key: '/login', label: 'Sign In' },
             ]}
-            defaultActive="signup"
-            onChange={(k) => activeTab$.set(k)}
+            defaultActive="/login"
+            onChange={(k) => router.push(k as never)}
           />
-          {activeTab === 'signin' ? <LoginForm /> : <CreateAccountForm />}
+          <LoginForm />
         </Column>
       </View>
     </Container>

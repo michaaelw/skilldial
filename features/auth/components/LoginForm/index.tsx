@@ -43,18 +43,25 @@ export function LoginForm() {
       {Boolean(serverError) && <Text variant="error">{serverError}</Text>}
       <Column style={[gap8]}>
         {emailTouched && <Text variant="error">{emailError}</Text>}
-        <Input
-          placeholder="Email"
-          onChangeText={formStore$.email.set}
-          onBlur={() => formStore$.touched.email.set(true)}></Input>
+        <Column>
+          <Text>Email</Text>
+          <Input
+            placeholder="Email"
+            onChangeText={formStore$.email.set}
+            onBlur={() => formStore$.touched.email.set(true)}></Input>
+        </Column>
       </Column>
 
       <Column style={[gap8]}>
         {passwordTouched && <Text variant="error">{passwordError}</Text>}
-        <Input
-          placeholder="Password"
-          onChangeText={formStore$.password.set}
-          onBlur={() => formStore$.touched.password.set(true)}></Input>
+        <Column>
+          <Text>Password</Text>
+          <Input
+            placeholder="Password"
+            secureTextEntry
+            onChangeText={formStore$.password.set}
+            onBlur={() => formStore$.touched.password.set(true)}></Input>
+        </Column>
       </Column>
 
       <Row style={[alignCenter, justifySpaceBetween]}>
@@ -75,13 +82,9 @@ export function LoginForm() {
         title="Continue with Apple"></Button>
       <Button variant="outline" icon={<XCompanyIcon />} title="Continue with X"></Button>
 
-      <Link href="/create-account" style={[flex]}>
-        <Row style={[flex, wMax, justifyCenter]}>
-          <Text>
-            Don't have an account? <Text style={[fontBold]}>Sign up</Text>
-          </Text>
-        </Row>
-      </Link>
+      <Text>
+        By using Skilldial, you agree to the Terms of Service and Data Processing Agreement.
+      </Text>
     </Column>
   );
 }
