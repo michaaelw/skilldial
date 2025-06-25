@@ -22,8 +22,13 @@ import { Link } from 'expo-router';
 
 import { useAuthPresenter } from '../../AuthPresenter';
 import { useLoginFormStore } from './LoginFormStore';
+import { GoogleIcon } from '@/components/icons/Google';
+import AppleIcon from '@/components/icons/Apple';
+import { XCompanyIcon } from '@/components/icons/XCompanyIcon';
+import { useTheme } from '@/components/ThemeProvider';
 
 export function LoginForm() {
+  const { theme } = useTheme();
   const formStore$ = useLoginFormStore();
   const emailError = useSelector(formStore$.errors.email);
   const passwordError = useSelector(formStore$.errors.password);
@@ -63,9 +68,12 @@ export function LoginForm() {
 
       <Text style={[textCenter]}>Or</Text>
 
-      <Button title="Continue with Google"></Button>
-      <Button title="Continue with Apple"></Button>
-      <Button title="Continue with X"></Button>
+      <Button variant="outline" icon={<GoogleIcon />} title="Continue with Google"></Button>
+      <Button
+        variant="outline"
+        icon={<AppleIcon color={theme.colors.typography} />}
+        title="Continue with Apple"></Button>
+      <Button variant="outline" icon={<XCompanyIcon />} title="Continue with X"></Button>
 
       <Link href="/create-account" style={[flex]}>
         <Row style={[flex, wMax, justifyCenter]}>

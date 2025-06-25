@@ -99,7 +99,6 @@ function getButtonVariantStyle(variant: Variants, theme: Theme): ViewStyle {
       };
     case 'outline':
       return {
-        backgroundColor: '#222',
         borderWidth: 1,
         borderColor: '#666',
         elevation: 0,
@@ -120,7 +119,7 @@ function getTextVariantStyle(variant: Variants, theme: Theme): TextStyle {
       return { color: theme.colors.background };
     case 'secondary':
     case 'outline':
-      return { color: theme.colors.white };
+      return { color: theme.colors.typography };
     case 'ghost':
       return { color: theme.colors.typography };
     default:
