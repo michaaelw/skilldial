@@ -31,7 +31,12 @@ export const Input = forwardRef<TextInput, InputProps>(
           <TextInput
             ref={ref}
             {...inputProps}
-            style={[styles.input, variantStyle, { color: theme.colors.typography }, style]}
+            style={[
+              styles.input,
+              variantStyle,
+              { color: theme.colors.typography, borderColor: theme.colors.border },
+              style,
+            ]}
             placeholderTextColor={'#ccc'}
           />
 

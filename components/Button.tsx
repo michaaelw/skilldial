@@ -82,7 +82,7 @@ function getButtonVariantStyle(variant: Variants, theme: Theme): ViewStyle {
   switch (variant) {
     case 'primary':
       return {
-        backgroundColor: theme.colors.blue,
+        backgroundColor: theme.colors.typography,
       };
     case 'secondary':
       return {
@@ -117,6 +117,7 @@ function getButtonVariantStyle(variant: Variants, theme: Theme): ViewStyle {
 function getTextVariantStyle(variant: Variants, theme: Theme): TextStyle {
   switch (variant) {
     case 'primary':
+      return { color: theme.colors.background };
     case 'secondary':
     case 'outline':
       return { color: theme.colors.white };

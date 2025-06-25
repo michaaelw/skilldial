@@ -28,7 +28,7 @@ export const ThemeContext = createContext<ThemeContextType>({
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const colorScheme = useColorScheme();
-  const [currentScheme, setCurrentScheme] = useState<Schemes>('dark');
+  const [currentScheme, setCurrentScheme] = useState<Schemes>('light');
   const [media, setMedia] = useState<Record<keyof Theme['breakpoints'], boolean>>({
     sm: true,
     md: false,

@@ -33,12 +33,13 @@ export const lightTheme = {
   colors: {
     ...sharedColors,
     typography: "#444",
-    background: "#f7f7f7",
+    background: "white", // "#f7f7f7",
     card: "#fff",
-    border: "#ddd",
+    border: "#E2E8F0",
     input: "#f7f7f7",
     inputText: "#666",
     heading: "#666",
+    tab: "#F1F5F9",
   },
 };
 
@@ -53,6 +54,7 @@ export const darkTheme = {
     border: "#ddd",
     input: "#DDD",
     inputText: "#333",
+    tab: "#222",
   },
 };
 

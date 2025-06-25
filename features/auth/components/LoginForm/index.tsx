@@ -4,7 +4,19 @@ import { Column } from '@/components/Column';
 import { Input } from '@/components/Input';
 import { Row } from '@/components/Row';
 import { Text } from '@/components/Text';
-import { flex, fontBold, gap16, gap8, justifyCenter, mxAuto, p8, textCenter, wMax } from '@/styles';
+import {
+  alignCenter,
+  flex,
+  fontBold,
+  gap16,
+  gap8,
+  justifyCenter,
+  justifySpaceBetween,
+  mxAuto,
+  p8,
+  textCenter,
+  wMax,
+} from '@/styles';
 import { useObservable, useObserve, useSelector } from '@legendapp/state/react';
 import { Link } from 'expo-router';
 
@@ -22,11 +34,7 @@ export function LoginForm() {
   const { handleLogin } = useAuthPresenter();
 
   return (
-    <Column style={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
-      <Text variant="h1" style={[textCenter]}>
-        Login to your account
-      </Text>
-      <Text style={[textCenter]}>Welcome back. Please enter your details.</Text>
+    <Column style={[wMax, mxAuto, { maxWidth: 1200 }, gap16, p8]}>
       {Boolean(serverError) && <Text variant="error">{serverError}</Text>}
       <Column style={[gap8]}>
         {emailTouched && <Text variant="error">{emailError}</Text>}
@@ -44,11 +52,20 @@ export function LoginForm() {
           onBlur={() => formStore$.touched.password.set(true)}></Input>
       </Column>
 
-      <Row>
+      <Row style={[alignCenter, justifySpaceBetween]}>
         <CheckboxWithLabel label="Remember for 30 days" />
+        <Link href="/forgot-password">
+          <Text>Forgot Password?</Text>
+        </Link>
       </Row>
 
       <Button title="Sign in" onPress={handleLogin}></Button>
+
+      <Text style={[textCenter]}>Or</Text>
+
+      <Button title="Continue with Google"></Button>
+      <Button title="Continue with Apple"></Button>
+      <Button title="Continue with X"></Button>
 
       <Link href="/create-account" style={[flex]}>
         <Row style={[flex, wMax, justifyCenter]}>

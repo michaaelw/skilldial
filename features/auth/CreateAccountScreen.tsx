@@ -28,7 +28,7 @@ export function CreateAccountScreen() {
     transform: [{ translateY: isMounted ? withTiming(0, { duration: 1000 }) : withTiming(100) }],
   }));
   return (
-    <Container>
+    <Container showHeader={false}>
       <CreateAccountForm />
     </Container>
   );
