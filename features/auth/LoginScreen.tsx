@@ -11,11 +11,9 @@ import { Column } from '@/components/Column';
 import { Text } from '@/components/Text';
 import { useTheme } from '@/components/ThemeProvider';
 import { flex, gap16, gap8, mxAuto, p16, p8, textCenter, wMax } from '@/styles';
-import { Logo } from '@/components/icons/Logo';
-import { Row } from '@/components/Row';
-import { Button } from '@/components/Button';
+
 import { TabBar } from '@/components/TabBar';
-import { CreateAccountForm } from './components/CreateAccountForm';
+
 import { router } from 'expo-router';
 
 export function LoginScreen() {
@@ -34,6 +32,9 @@ export function LoginScreen() {
     opacity: isMounted ? withTiming(1, { duration: 1000 }) : withTiming(0),
     transform: [{ translateY: isMounted ? withTiming(0, { duration: 1000 }) : withTiming(100) }],
   }));
+
+  if (!isMounted) return null;
+
   return (
     <Container showHeader={false}>
       <View

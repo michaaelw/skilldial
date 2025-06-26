@@ -24,6 +24,7 @@ module.exports = ({ config }) => {
 
       supabaseURL: process.env.EXPO_PUBLIC_SUPABASE_URL,
       supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
+      appURL: process.env.EXPO_PUBLIC_APP_URL,
       eas: {
         projectId: process.env.EXPO_PUBLIC_EAS_PROJECT_ID,
       },

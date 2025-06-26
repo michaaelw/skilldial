@@ -1,4 +1,5 @@
 import { supabase } from "@/utils/supabase";
+import * as config from "@/config";
 
 export async function loginInAnonymously() {
   const { data, error } = await supabase.auth.signInAnonymously();
@@ -19,8 +20,6 @@ export async function logout() {
 }
 
 type CreateAccountInput = {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
 };
@@ -30,11 +29,32 @@ export async function createAccount(input: CreateAccountInput) {
     email: input.email,
     password: input.password,
     options: {
-      data: {
-        firstName: input.firstName,
-        lastName: input.lastName,
-      },
+      data: {},
     },
+  });
+}
+
+type RequestPasswordResetInput = {
+  email: string;
+};
+
+export async function requestPasswordReset(input: RequestPasswordResetInput) {
+  return supabase.auth.resetPasswordForEmail(input.email, {
+    redirectTo: config.appURL + "/update-password",
+  });
+}
+
+export async function updatePassword(input: { password: string }) {
+  return supabase.auth.updateUser({ password: input.password });
+}
+
+export async function setSession(
+  access_token: string,
+  refresh_token: string,
+) {
+  return supabase.auth.setSession({
+    access_token,
+    refresh_token,
   });
 }
 

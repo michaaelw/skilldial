@@ -7,12 +7,16 @@ import { router } from "expo-router";
 import { useLoginFormStore } from "./components/LoginForm/LoginFormStore";
 import { useCreateAccountFormStore } from "./components/CreateAccountForm/CreateAccountFormStore";
 import * as SplashScreen from "expo-splash-screen";
+import { useForgotPasswordFormStore } from "./components/ForgotPasswordForm/ForgotPasswordFormStore";
+import { useUpdatePasswordFormStore } from "./components/UpdatePasswordForm/UpdatePasswordFormStore";
 
 export function useAuthPresenter() {
   const user = useSelector(authStore$.user);
   const isLoading = useSelector(authStore$.isLoading);
   const createAccountFormStore$ = useCreateAccountFormStore();
   const loginFormStore$ = useLoginFormStore();
+  const forgotPasswordFormStore$ = useForgotPasswordFormStore();
+  const updatePasswordFormStore$ = useUpdatePasswordFormStore();
 
   const logout = () => {
     authService.logout();
@@ -36,8 +40,6 @@ export function useAuthPresenter() {
     const form = createAccountFormStore$.get();
 
     authService.createAccount({
-      firstName: form.firstName,
-      lastName: form.lastName,
       email: form?.email,
       password: form?.password,
     }).then((res) => {
@@ -46,6 +48,43 @@ export function useAuthPresenter() {
         router.replace("/");
       }
     });
+  }
+
+  function requestPasswordReset() {
+    const form = forgotPasswordFormStore$.get();
+    forgotPasswordFormStore$.isPending.set(true);
+    authService.requestPasswordReset({ email: form.email }).then((res) => {
+      forgotPasswordFormStore$.isPending.set(false);
+      if (!res.error) {
+        console.log("reset password response ", res);
+        forgotPasswordFormStore$.emailSent.set(true);
+      } else {
+        forgotPasswordFormStore$.emailSent.set(false);
+        forgotPasswordFormStore$.serverError.set(res.error?.message);
+      }
+    });
+  }
+
+  function updatePassword() {
+    const form = updatePasswordFormStore$.get();
+
+    authService.updatePassword({ password: form.password }).then((res) => {
+      console.log("update password response ", res);
+      if (!res.error) {
+        updatePasswordFormStore$.passwordUpdated.set(true);
+      } else {
+        updatePasswordFormStore$.serverError.set(res?.error?.message);
+      }
+    });
+  }
+
+  function updateSession(
+    { accessToken, refreshToken }: {
+      accessToken: string;
+      refreshToken: string;
+    },
+  ) {
+    authService.setSession(accessToken, refreshToken);
   }
 
   function handleLogin() {
@@ -77,7 +116,10 @@ export function useAuthPresenter() {
   return {
     handleCreateAccount,
     handleLogin,
+    updateSession,
     user,
+    requestPasswordReset,
+    updatePassword,
     logout,
     isLoading,
     loginInAnonymously,

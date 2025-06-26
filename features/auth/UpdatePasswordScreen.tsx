@@ -5,29 +5,34 @@ import Animated, { useAnimatedSensor, useAnimatedStyle, withTiming } from 'react
 import { useAuthPresenter } from './AuthPresenter';
 import { useAuth } from './AuthContext';
 
-import { LoginForm } from './components/LoginForm';
 import { Image, View } from 'react-native';
 import { Column } from '@/components/Column';
 import { Text } from '@/components/Text';
 import { useTheme } from '@/components/ThemeProvider';
-import { flex, gap16, gap8, mxAuto, p16, p8, textCenter, wMax } from '@/styles';
-import { Logo } from '@/components/icons/Logo';
-import { Row } from '@/components/Row';
-import { Button } from '@/components/Button';
-import { TabBar } from '@/components/TabBar';
-import { CreateAccountForm } from './components/CreateAccountForm';
-import { router } from 'expo-router';
+import {
+  alignCenter,
+  flex,
+  gap16,
+  gap8,
+  justifySpaceBetween,
+  mxAuto,
+  p16,
+  p8,
+  textCenter,
+  wMax,
+} from '@/styles';
 
-export function CreateAccountScreen() {
+import { UpdatePasswordForm } from './components/UpdatePasswordForm';
+
+import { useHandleResetLink } from './components/UpdatePasswordForm/useHandleResetLink';
+
+export function UpdatePasswordScreen() {
+  useHandleResetLink();
   const { user } = useAuth();
 
   const isMounted$ = useIsMounted();
   const isMounted = useSelector(isMounted$);
 
-  const activeTab$ = useObservable<string>();
-  const activeTab = useSelector(activeTab$);
-
-  const { loginInAnonymously } = useAuthPresenter();
   const { media } = useTheme();
 
   const style = useAnimatedStyle(() => ({
@@ -42,6 +47,7 @@ export function CreateAccountScreen() {
       <View
         style={[
           flex,
+          gap8,
           p16,
           { flexDirection: media?.md ? 'row' : 'column', maxWidth: 1000 },
           wMax,
@@ -52,20 +58,12 @@ export function CreateAccountScreen() {
             source={require('@/assets/skilldial-small.png')}
             style={{ width: 50, height: 50 }}
           />
-          <Text variant="h2">Create an account</Text>
-          <Text>Turn up the dial on your knowledge</Text>
+          <Text variant="h2">Update password?</Text>
+          <Text>No worries, we'll send you reset instructions.</Text>
         </Column>
 
         <Column style={[flex]}>
-          <TabBar
-            tabs={[
-              { key: '/create-account', label: 'Sign Up' },
-              { key: '/login', label: 'Sign In' },
-            ]}
-            defaultActive="/create-account"
-            onChange={(k) => router.replace(k as never)}
-          />
-          <CreateAccountForm />
+          <UpdatePasswordForm />
         </Column>
       </View>
     </Container>
