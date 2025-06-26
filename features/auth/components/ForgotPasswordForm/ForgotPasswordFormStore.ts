@@ -1,4 +1,5 @@
-import { useObservable, useObserve } from "@legendapp/state/react";
+import { observable } from "@legendapp/state";
+import { useObserve } from "@legendapp/state/react";
 import { z } from "zod/v4";
 
 const forgotPasswordSchema = z.object({
@@ -15,7 +16,7 @@ type ForgotPasswordFormStore = FormType & {
   isPending: boolean;
 };
 
-export const forgotPasswordFormStore$ = useObservable<ForgotPasswordFormStore>({
+export const forgotPasswordFormStore$ = observable<ForgotPasswordFormStore>({
   isPending: false,
   emailSent: false,
   email: "",

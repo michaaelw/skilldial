@@ -7,6 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AuthProvider } from '@/features/auth/AuthContext';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
+import { PortalHost } from '@rn-primitives/portal';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,6 +24,7 @@ export default function Layout() {
           <GestureHandlerRootView>
             <AuthProvider>
               <Stack screenOptions={{ headerShown: false }} />
+              <PortalHost />
             </AuthProvider>
           </GestureHandlerRootView>
         </ThemeProvider>

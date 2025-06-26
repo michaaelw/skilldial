@@ -1,4 +1,5 @@
-import { useObservable, useObserve } from "@legendapp/state/react";
+import { observable } from "@legendapp/state";
+import { useObserve } from "@legendapp/state/react";
 import { z } from "zod/v4";
 
 const updatePasswordSchema = z
@@ -25,7 +26,7 @@ type UpdatePasswordFormStore = FormType & {
   passwordUpdated: boolean;
 };
 
-export const updatePasswordFormStore$ = useObservable<UpdatePasswordFormStore>({
+export const updatePasswordFormStore$ = observable<UpdatePasswordFormStore>({
   password: "",
   confirmPassword: "",
   errors: { password: null, confirmPassword: null },

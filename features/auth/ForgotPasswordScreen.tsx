@@ -57,6 +57,8 @@ export function ForgotPasswordScreen() {
     transform: [{ translateY: isMounted ? withTiming(0, { duration: 1000 }) : withTiming(100) }],
   }));
 
+  if (!isMounted) return null;
+
   if (emailSent) {
     return (
       <Container showHeader={false}>

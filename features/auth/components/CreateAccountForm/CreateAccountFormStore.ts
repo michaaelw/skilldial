@@ -1,3 +1,4 @@
+import { observable } from "@legendapp/state";
 import { useObservable, useObserve } from "@legendapp/state/react";
 import { z } from "zod/v4";
 
@@ -21,7 +22,7 @@ type SignupFormStore = FormType & {
   isValid: boolean;
 };
 
-const formStore$ = useObservable<SignupFormStore>({
+const formStore$ = observable<SignupFormStore>({
   email: "",
   password: "",
   confirmPassword: "",

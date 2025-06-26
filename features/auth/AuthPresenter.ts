@@ -68,14 +68,19 @@ export function useAuthPresenter() {
   function updatePassword() {
     const form = updatePasswordFormStore$.get();
 
-    authService.updatePassword({ password: form.password }).then((res) => {
-      console.log("update password response ", res);
-      if (!res.error) {
-        updatePasswordFormStore$.passwordUpdated.set(true);
-      } else {
-        updatePasswordFormStore$.serverError.set(res?.error?.message);
-      }
-    });
+    updatePasswordFormStore$.isPending.set(true);
+    return authService.updatePassword({ password: form.password }).then(
+      (res) => {
+        updatePasswordFormStore$.isPending.set(false);
+        if (!res.error) {
+          updatePasswordFormStore$.passwordUpdated.set(true);
+          return true;
+        } else {
+          updatePasswordFormStore$.serverError.set(res?.error?.message);
+          return false;
+        }
+      },
+    );
   }
 
   function updateSession(

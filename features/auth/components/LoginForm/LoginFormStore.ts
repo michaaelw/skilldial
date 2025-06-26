@@ -1,3 +1,4 @@
+import { observable } from "@legendapp/state";
 import { useObservable, useObserve } from "@legendapp/state/react";
 import { z } from "zod/v4";
 
@@ -15,7 +16,7 @@ type LoginFormStore = FormType & {
   serverError: string | null;
 };
 
-const formStore$ = useObservable<LoginFormStore>({
+const formStore$ = observable<LoginFormStore>({
   email: "",
   password: "",
   errors: { email: null, password: null },

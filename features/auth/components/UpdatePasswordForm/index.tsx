@@ -8,10 +8,15 @@ import { useSelector } from '@legendapp/state/react';
 
 import { useAuthPresenter } from '../../AuthPresenter';
 import { useUpdatePasswordFormStore } from './UpdatePasswordFormStore';
+import { AlertDialog, AlertRef } from '@/components/AlertDialog';
+import { useRef } from 'react';
+import { router } from 'expo-router';
+import { Spinner } from '@/components/icons/Spinner';
 
 export function UpdatePasswordForm() {
   const form$ = useUpdatePasswordFormStore();
 
+  const isPending = useSelector(form$.isPending);
   const pwdTouched = useSelector(form$.touched.password);
   const confTouched = useSelector(form$.touched.confirmPassword);
   const pwdError = useSelector(form$.errors.password);
@@ -20,8 +25,26 @@ export function UpdatePasswordForm() {
 
   const { updatePassword, updateSession } = useAuthPresenter();
 
+  const alertRef = useRef<AlertRef>(null);
+
+  const handleUpdatePassword = () => {
+    updatePassword().then((res) => {
+      if (res) {
+        alertRef.current
+          ?.show(
+            'Password reset',
+            'Your password has been successfully reset. Click below to log in magically.'
+          )
+          .then((res) => {
+            router.replace('/');
+          });
+      }
+    });
+  };
+
   return (
     <Column style={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
+      <AlertDialog ref={alertRef} />
       {!!serverError && <Text variant="error">{serverError}</Text>}
 
       <Column style={[gap8]}>
@@ -56,8 +79,9 @@ export function UpdatePasswordForm() {
 
       <Button
         title="Update Password"
-        onPress={updatePassword}
-        disabled={!pwdTouched || !confTouched || !!pwdError || !!confError}
+        icon={isPending ? <Spinner /> : null}
+        onPress={handleUpdatePassword}
+        disabled={!!pwdError || !!confError}
       />
     </Column>
   );

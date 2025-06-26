@@ -48,7 +48,7 @@ export function ForgotPasswordForm() {
         icon={isPending ? <Spinner /> : null}
         title="Reset Password"
         onPress={handleSubmit}
-        disabled={!touched || !!error}
+        disabled={!!error}
       />
     </Column>
   );
