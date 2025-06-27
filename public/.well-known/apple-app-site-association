@@ -1,0 +1,27 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "RYKTV74P33.com.skilldial.app.dev3"
+        ],
+        "components": [
+          {
+            "/": "*",
+            "comment": "Matches all routes"
+          }
+        ]
+      }
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "RYKTV74P33.com.skilldial.app.dev3"
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "RYKTV74P33.com.skilldial.app.dev3"
+    ]
+  }
+}

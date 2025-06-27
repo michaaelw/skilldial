@@ -34,6 +34,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.skilldial.app.dev3",
+      "associatedDomains": ["applinks:skill-dial-dev.expo.dev", "skill-dial.expo.dev"],
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
