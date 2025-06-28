@@ -29,7 +29,6 @@ import { useHandleResetLink } from './components/UpdatePasswordForm/useHandleRes
 export function UpdatePasswordScreen() {
   useHandleResetLink();
   const { user } = useAuth();
-
   const isMounted$ = useIsMounted();
   const isMounted = useSelector(isMounted$);
 

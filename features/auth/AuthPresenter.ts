@@ -1,5 +1,5 @@
 import { useSelector } from "@legendapp/state/react";
-import { AuthChangeEvent, Session } from "@supabase/supabase-js";
+import { AuthChangeEvent, EmailOtpType, Session } from "@supabase/supabase-js";
 import { authStore$ } from "./AuthStore";
 
 import * as authService from "./AuthService";
@@ -92,6 +92,20 @@ export function useAuthPresenter() {
     authService.setSession(accessToken, refreshToken);
   }
 
+  function verifyOtp(
+    { tokenHash, type }: {
+      tokenHash: string;
+      type: EmailOtpType;
+    },
+  ) {
+    authService.verifyOtp({ tokenHash, type }).then((res) => {
+      if (res.error) {
+        updatePasswordFormStore$.serverError.set(res.error?.message);
+        updatePasswordFormStore$.verified.set(true);
+      }
+    });
+  }
+
   function handleLogin() {
     const form = loginFormStore$.get();
 
@@ -123,6 +137,7 @@ export function useAuthPresenter() {
     handleLogin,
     updateSession,
     user,
+    verifyOtp,
     requestPasswordReset,
     updatePassword,
     logout,

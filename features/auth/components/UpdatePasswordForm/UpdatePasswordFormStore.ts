@@ -23,10 +23,12 @@ type UpdatePasswordFormStore = FormType & {
   touched: { password: boolean; confirmPassword: boolean };
   serverError: string | null;
   isPending: boolean;
+  verified: boolean;
   passwordUpdated: boolean;
 };
 
 export const updatePasswordFormStore$ = observable<UpdatePasswordFormStore>({
+  verified: false,
   password: "",
   confirmPassword: "",
   errors: { password: null, confirmPassword: null },

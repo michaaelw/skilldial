@@ -1,5 +1,6 @@
 import { supabase } from "@/utils/supabase";
 import * as config from "@/config";
+import { EmailOtpType, MobileOtpType } from "@supabase/supabase-js";
 
 export async function loginInAnonymously() {
   const { data, error } = await supabase.auth.signInAnonymously();
@@ -68,4 +69,13 @@ export async function login(input: LoginInput) {
     email: input.email,
     password: input.password,
   });
+}
+
+export async function verifyOtp(
+  { tokenHash, type }: {
+    tokenHash: string;
+    type: EmailOtpType;
+  },
+) {
+  return supabase.auth.verifyOtp({ token_hash: tokenHash, type: type });
 }

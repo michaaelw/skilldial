@@ -22,6 +22,7 @@ export function UpdatePasswordForm() {
   const pwdError = useSelector(form$.errors.password);
   const confError = useSelector(form$.errors.confirmPassword);
   const serverError = useSelector(form$.serverError);
+  const verified = useSelector(form$.verified);
 
   const { updatePassword, updateSession } = useAuthPresenter();
 
@@ -41,6 +42,14 @@ export function UpdatePasswordForm() {
       }
     });
   };
+
+  if (!verified && serverError) {
+    return (
+      <Column style={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
+        <Text>{serverError}</Text>
+      </Column>
+    );
+  }
 
   return (
     <Column style={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
