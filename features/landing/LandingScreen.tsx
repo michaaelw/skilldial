@@ -15,14 +15,14 @@ import { Column } from '@/components/Column';
 import { Container } from '@/components/Container';
 import { Redirect } from 'expo-router';
 import { useAuth } from '../auth/AuthContext';
-import { Loader2 } from 'lucide-react-native';
-import * as config from '@/config';
+
+import { LoadingSpinner } from '../auth/components/LoadingSpinner';
 
 export function LandingScreen() {
   const { theme } = useTheme();
   const { user, isLoading } = useAuth();
 
-  if (isLoading) return <Loader2 />;
+  if (isLoading) return <LoadingSpinner />;
   if (user) {
     return <Redirect href={'/(main)'} />;
   }

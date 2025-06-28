@@ -20,7 +20,8 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "tsconfigPaths": true
+      "tsconfigPaths": true,
+      "reactCompiler": true
     },
     "orientation": "portrait",
     "icon": "./assets/skilldial.png",
