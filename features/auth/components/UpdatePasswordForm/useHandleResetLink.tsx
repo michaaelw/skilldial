@@ -1,16 +1,15 @@
-import * as ExpoLinking from 'expo-linking';
-import { normalizeHashUrl } from '@/utils/normalizeHashUrl';
 import { useEffect } from 'react';
 import { useAuthPresenter } from '../../AuthPresenter';
 import { useLocalSearchParams } from 'expo-router';
 import { EmailOtpType } from '@supabase/supabase-js';
 
 export function useHandleResetLink() {
-  const params = useLocalSearchParams<{ token_hash: string; type: EmailOtpType }>();
+  const params = useLocalSearchParams<{ token: string; type: EmailOtpType; email: string }>();
 
-  const url = ExpoLinking.useURL();
-  const { updatePassword, updateSession, verifyOtp } = useAuthPresenter();
+  //const url = ExpoLinking.useURL();
+  const { verifyOtp } = useAuthPresenter();
 
+  /*
   useEffect(() => {
     if (url) {
       const { validUrl, params } = normalizeHashUrl(url);
@@ -19,11 +18,11 @@ export function useHandleResetLink() {
         updateSession({ accessToken: params.access_token, refreshToken: params.refresh_token });
       }
     }
-  }, [url]);
+  }, [url]); */
 
   useEffect(() => {
-    if (params.token_hash && params.type) {
-      verifyOtp({ tokenHash: params.token_hash, type: params.type });
+    if (params.email && params.type && params.token) {
+      verifyOtp({ token: params.token, type: params.type, email: params.email });
     }
   }, [params]);
 }

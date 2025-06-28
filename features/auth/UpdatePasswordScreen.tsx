@@ -24,10 +24,8 @@ import {
 
 import { UpdatePasswordForm } from './components/UpdatePasswordForm';
 
-import { useHandleResetLink } from './components/UpdatePasswordForm/useHandleResetLink';
-
 export function UpdatePasswordScreen() {
-  useHandleResetLink();
+  //useHandleResetLink();
   const { user } = useAuth();
   const isMounted$ = useIsMounted();
   const isMounted = useSelector(isMounted$);

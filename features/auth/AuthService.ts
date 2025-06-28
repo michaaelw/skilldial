@@ -79,3 +79,13 @@ export async function verifyOtp(
 ) {
   return supabase.auth.verifyOtp({ token_hash: tokenHash, type: type });
 }
+
+export async function verifyOtpWithToken(
+  { token, type, email }: {
+    token: string;
+    email: string;
+    type: EmailOtpType;
+  },
+) {
+  return supabase.auth.verifyOtp({ token, type: type, email });
+}

@@ -32,6 +32,7 @@ import { Button } from '@/components/Button';
 import { ChevronLeft } from 'lucide-react-native';
 import { Row } from '@/components/Row';
 import { Spinner } from '@/components/icons/Spinner';
+import { Input } from '@/components/Input';
 
 export function ForgotPasswordScreen() {
   const { user } = useAuth();
@@ -42,13 +43,14 @@ export function ForgotPasswordScreen() {
   const activeTab$ = useObservable<string>();
   const activeTab = useSelector(activeTab$);
 
-  const { loginInAnonymously, requestPasswordReset } = useAuthPresenter();
+  const { verifyOtp, requestPasswordReset } = useAuthPresenter();
 
   const { media } = useTheme();
 
   const formStore$ = useForgotPasswordFormStore();
   const emailSent = useSelector(formStore$.emailSent);
   const email = useSelector(formStore$.email);
+  const token = useSelector(formStore$.token);
 
   const isPending = useSelector(formStore$.isPending);
 
@@ -81,7 +83,16 @@ export function ForgotPasswordScreen() {
           </Column>
 
           <Column style={[flex, gap8]}>
-            <Button title="Open email app"></Button>
+            <Column style={[gap8]}>
+              <Text>Enter token</Text>
+              <Input placeholder="Token" onChangeText={formStore$.token.set} />
+
+              <Button
+                title="Verify Token"
+                onPress={() => {
+                  verifyOtp({ token, email, type: 'recovery' });
+                }}></Button>
+            </Column>
 
             <Button
               variant="ghost"

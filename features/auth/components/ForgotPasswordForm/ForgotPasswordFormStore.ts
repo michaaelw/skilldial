@@ -13,10 +13,12 @@ type ForgotPasswordFormStore = FormType & {
   touched: { email: boolean };
   serverError: string | null;
   emailSent: boolean;
+  token: string;
   isPending: boolean;
 };
 
 export const forgotPasswordFormStore$ = observable<ForgotPasswordFormStore>({
+  token: "",
   isPending: false,
   emailSent: false,
   email: "",

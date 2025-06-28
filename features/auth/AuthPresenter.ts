@@ -9,6 +9,7 @@ import { useCreateAccountFormStore } from "./components/CreateAccountForm/Create
 import * as SplashScreen from "expo-splash-screen";
 import { useForgotPasswordFormStore } from "./components/ForgotPasswordForm/ForgotPasswordFormStore";
 import { useUpdatePasswordFormStore } from "./components/UpdatePasswordForm/UpdatePasswordFormStore";
+import { supabase } from "@/utils/supabase";
 
 export function useAuthPresenter() {
   const user = useSelector(authStore$.user);
@@ -91,14 +92,18 @@ export function useAuthPresenter() {
   }
 
   function verifyOtp(
-    { tokenHash, type }: {
-      tokenHash: string;
+    { token, type, email }: {
+      token: string;
+      email: string;
       type: EmailOtpType;
     },
   ) {
-    authService.verifyOtp({ tokenHash, type }).then((res) => {
+    authService.verifyOtpWithToken({ token, type, email }).then((res) => {
       if (res.error) {
+        console.log("verify error ", res.error);
         updatePasswordFormStore$.serverError.set(res.error?.message);
+      } else {
+        router.push("/(auth)/update-password");
         updatePasswordFormStore$.verified.set(true);
       }
     });
