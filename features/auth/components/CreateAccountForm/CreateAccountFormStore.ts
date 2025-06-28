@@ -19,7 +19,9 @@ type FormType = z.infer<typeof signupSchema>;
 type SignupFormStore = FormType & {
   errors: { [K in keyof FormType]: string | null };
   touched: { [K in keyof FormType]: boolean };
+  serverError: string | null;
   isValid: boolean;
+  reset: () => void;
 };
 
 const formStore$ = observable<SignupFormStore>({
@@ -27,6 +29,7 @@ const formStore$ = observable<SignupFormStore>({
   password: "",
   confirmPassword: "",
   isValid: false,
+  serverError: null,
   errors: {
     email: null,
     password: null,
@@ -36,6 +39,22 @@ const formStore$ = observable<SignupFormStore>({
     email: false,
     password: false,
     confirmPassword: false,
+  },
+  reset: () => {
+    formStore$.email.set("");
+    formStore$.password.set("");
+    formStore$.confirmPassword.set("");
+    formStore$.errors.set({
+      email: null,
+      password: null,
+      confirmPassword: null,
+    });
+    formStore$.touched.set({
+      email: false,
+      password: false,
+      confirmPassword: false,
+    });
+    formStore$.serverError.set(null);
   },
 });
 

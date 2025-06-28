@@ -24,7 +24,7 @@ export function UpdatePasswordForm() {
   const serverError = useSelector(form$.serverError);
   const verified = useSelector(form$.verified);
 
-  const { updatePassword, updateSession } = useAuthPresenter();
+  const { updatePassword } = useAuthPresenter();
 
   const alertRef = useRef<AlertRef>(null);
 

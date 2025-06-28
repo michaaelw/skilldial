@@ -14,6 +14,7 @@ type LoginFormStore = FormType & {
   errors: { [K in keyof FormType]: string | null };
   touched: { [K in keyof FormType]: boolean };
   serverError: string | null;
+  reset: () => void;
 };
 
 const formStore$ = observable<LoginFormStore>({
@@ -22,6 +23,13 @@ const formStore$ = observable<LoginFormStore>({
   errors: { email: null, password: null },
   touched: { email: false, password: false },
   serverError: null,
+  reset: () => {
+    formStore$.email.set("");
+    formStore$.password.set("");
+    formStore$.errors.set({ email: null, password: null });
+    formStore$.touched.set({ email: false, password: false });
+    formStore$.serverError.set(null);
+  },
 });
 
 export function useLoginFormStore() {

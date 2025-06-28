@@ -1,3 +1,9 @@
+import React, { useEffect } from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView, // 👈 new
+} from 'react-native';
 import { Button } from '@/components/Button';
 import { CheckboxWithLabel } from '@/components/CheckboxWithLabel';
 import { Column } from '@/components/Column';
@@ -7,17 +13,15 @@ import { Text } from '@/components/Text';
 import {
   alignCenter,
   flex,
-  fontBold,
   gap16,
   gap8,
-  justifyCenter,
   justifySpaceBetween,
   mxAuto,
   p8,
   textCenter,
   wMax,
 } from '@/styles';
-import { useObservable, useObserve, useSelector } from '@legendapp/state/react';
+import { useSelector } from '@legendapp/state/react';
 import { Link } from 'expo-router';
 
 import { useAuthPresenter } from '../../AuthPresenter';
@@ -38,53 +42,66 @@ export function LoginForm() {
 
   const { handleLogin } = useAuthPresenter();
 
+  useEffect(() => {
+    () => formStore$.reset();
+  }, []);
+
   return (
-    <Column style={[wMax, mxAuto, { maxWidth: 1200 }, gap16, p8]}>
-      {Boolean(serverError) && <Text variant="error">{serverError}</Text>}
-      <Column style={[gap8]}>
-        {emailTouched && <Text variant="error">{emailError}</Text>}
-        <Column>
-          <Text>Email</Text>
-          <Input
-            placeholder="Email"
-            onChangeText={formStore$.email.set}
-            onBlur={() => formStore$.touched.email.set(true)}></Input>
+    <KeyboardAvoidingView
+      style={[flex]}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}>
+      <ScrollView contentContainerStyle={[wMax, mxAuto, { maxWidth: 1200 }, gap16, p8]}>
+        {Boolean(serverError) && <Text variant="error">{serverError}</Text>}
+
+        <Column style={[gap8]}>
+          {emailTouched && <Text variant="error">{emailError}</Text>}
+          <Column>
+            <Text>Email</Text>
+            <Input
+              placeholder="Email"
+              onChangeText={formStore$.email.set}
+              onBlur={() => formStore$.touched.email.set(true)}
+            />
+          </Column>
         </Column>
-      </Column>
 
-      <Column style={[gap8]}>
-        {passwordTouched && <Text variant="error">{passwordError}</Text>}
-        <Column>
-          <Text>Password</Text>
-          <Input
-            placeholder="Password"
-            secureTextEntry
-            onChangeText={formStore$.password.set}
-            onBlur={() => formStore$.touched.password.set(true)}></Input>
+        <Column style={[gap8]}>
+          {passwordTouched && <Text variant="error">{passwordError}</Text>}
+          <Column>
+            <Text>Password</Text>
+            <Input
+              placeholder="Password"
+              secureTextEntry
+              onChangeText={formStore$.password.set}
+              onBlur={() => formStore$.touched.password.set(true)}
+            />
+          </Column>
         </Column>
-      </Column>
 
-      <Row style={[alignCenter, justifySpaceBetween]}>
-        <CheckboxWithLabel label="Remember for 30 days" />
-        <Link href="/forgot-password">
-          <Text>Forgot Password?</Text>
-        </Link>
-      </Row>
+        <Row style={[alignCenter, justifySpaceBetween]}>
+          <CheckboxWithLabel label="Remember for 30 days" />
+          <Link href="/forgot-password">
+            <Text>Forgot Password?</Text>
+          </Link>
+        </Row>
 
-      <Button title="Sign in" onPress={handleLogin}></Button>
+        <Button title="Sign in" onPress={handleLogin} />
 
-      <Text style={[textCenter]}>Or</Text>
+        <Text style={[textCenter]}>Or</Text>
 
-      <Button variant="outline" icon={<GoogleIcon />} title="Continue with Google"></Button>
-      <Button
-        variant="outline"
-        icon={<AppleIcon color={theme.colors.typography} />}
-        title="Continue with Apple"></Button>
-      <Button variant="outline" icon={<XCompanyIcon />} title="Continue with X"></Button>
+        <Button variant="outline" icon={<GoogleIcon />} title="Continue with Google" />
+        <Button
+          variant="outline"
+          icon={<AppleIcon color={theme.colors.typography} />}
+          title="Continue with Apple"
+        />
+        <Button variant="outline" icon={<XCompanyIcon />} title="Continue with X" />
 
-      <Text>
-        By using Skilldial, you agree to the Terms of Service and Data Processing Agreement.
-      </Text>
-    </Column>
+        <Text>
+          By using Skilldial, you agree to the Terms of Service and Data Processing Agreement.
+        </Text>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }

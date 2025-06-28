@@ -18,7 +18,6 @@ import { useAuth } from '../auth/AuthContext';
 import { Loader2 } from 'lucide-react-native';
 import * as config from '@/config';
 
-console.log('config ', config);
 export function LandingScreen() {
   const { theme } = useTheme();
   const { user, isLoading } = useAuth();

@@ -1,7 +1,6 @@
 //require('@dotenvx/dotenvx').config({ path: isDev ? '.env.development' : '.env.production' });
 
 const isDev = process.env.EXPO_PUBLIC_APP_VARIANT === 'dev';
-console.log({ isDev });
 
 module.exports = ({ config }) => {
   return {

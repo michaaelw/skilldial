@@ -43,7 +43,6 @@ export function useAuthPresenter() {
       email: form?.email,
       password: form?.password,
     }).then((res) => {
-      console.log("create account result ", res);
       if (!res.error) {
         router.replace("/");
       }
@@ -56,7 +55,6 @@ export function useAuthPresenter() {
     authService.requestPasswordReset({ email: form.email }).then((res) => {
       forgotPasswordFormStore$.isPending.set(false);
       if (!res.error) {
-        console.log("reset password response ", res);
         forgotPasswordFormStore$.emailSent.set(true);
       } else {
         forgotPasswordFormStore$.emailSent.set(false);
