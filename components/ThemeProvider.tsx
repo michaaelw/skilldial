@@ -10,6 +10,7 @@ import React, {
 } from 'react';
 import { useColorScheme, useWindowDimensions } from 'react-native';
 import { lightTheme, darkTheme, Theme } from '@/theme';
+import { getStorageAdapter } from '@/utils/storageAdapter';
 
 type Schemes = 'light' | 'dark' | null | undefined;
 type ThemeContextType = {
@@ -26,9 +27,10 @@ export const ThemeContext = createContext<ThemeContextType>({
   setCurrentScheme: () => {},
 });
 
+const storage = getStorageAdapter();
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const colorScheme = useColorScheme();
-  const [currentScheme, setCurrentScheme] = useState<Schemes>('light');
+  const [currentScheme, setCurrentScheme] = useState<Schemes>(colorScheme);
   const [media, setMedia] = useState<Record<keyof Theme['breakpoints'], boolean>>({
     sm: true,
     md: false,
@@ -36,6 +38,18 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
     xl: false,
   });
   const dimensions = useWindowDimensions();
+
+  useEffect(() => {
+    let storedTheme = storage.getItem('theme') as Schemes;
+
+    setCurrentScheme(storedTheme);
+  }, []);
+
+  useEffect(() => {
+    if (currentScheme) {
+      storage.setItem('theme', currentScheme);
+    }
+  }, [currentScheme]);
 
   const theme = currentScheme === 'dark' ? darkTheme : lightTheme;
   useEffect(() => {
