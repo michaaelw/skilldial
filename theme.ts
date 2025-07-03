@@ -3,6 +3,7 @@ const sharedColors = {
   blue: "#1278F1",
   limedSpruce: "#38434D",
   cornflowerBlue: "#6366F1",
+  lightText: "#aaa",
   astral: "#2E78B7",
   green: "#00C96D",
   white: "#ffffff",

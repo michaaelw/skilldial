@@ -8,6 +8,7 @@ import { AuthProvider } from '@/features/auth/AuthContext';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
 import { PortalHost } from '@rn-primitives/portal';
+import { Toaster } from '@/components/Sonner';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,6 +26,7 @@ export default function Layout() {
             <AuthProvider>
               <Stack screenOptions={{ headerShown: false }} />
               <PortalHost />
+              <Toaster />
             </AuthProvider>
           </GestureHandlerRootView>
         </ThemeProvider>

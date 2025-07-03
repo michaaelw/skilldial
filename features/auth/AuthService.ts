@@ -41,7 +41,7 @@ type RequestPasswordResetInput = {
 
 export async function requestPasswordReset(input: RequestPasswordResetInput) {
   return supabase.auth.resetPasswordForEmail(input.email, {
-    redirectTo: config.appURL + "/update-password",
+    redirectTo: config.appURL + "/update-password?action=reset",
   });
 }
 

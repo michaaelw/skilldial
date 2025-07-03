@@ -24,7 +24,7 @@ export const Input = forwardRef<TextInput, InputProps>(
     const { theme } = useTheme();
 
     return (
-      <View style={{ height: 48 }}>
+      <View style={[{ height: 48 }, style]}>
         <View style={[styles.container, { flex: Platform.OS === 'web' ? 1 : 1 }]}>
           {leftIcon && <View style={styles.icon}>{leftIcon}</View>}
 

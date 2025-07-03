@@ -86,7 +86,7 @@ function getButtonVariantStyle(variant: Variants, theme: Theme): ViewStyle {
       };
     case 'secondary':
       return {
-        backgroundColor: theme.colors.cornflowerBlue,
+        backgroundColor: theme.colors.border,
       };
     case 'ghost':
       return {

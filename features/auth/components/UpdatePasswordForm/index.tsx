@@ -10,7 +10,7 @@ import { useAuthPresenter } from '../../AuthPresenter';
 import { useUpdatePasswordFormStore } from './UpdatePasswordFormStore';
 import { AlertDialog, AlertRef } from '@/components/AlertDialog';
 import { useRef } from 'react';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { Spinner } from '@/components/icons/Spinner';
 
 export function UpdatePasswordForm() {
@@ -24,6 +24,8 @@ export function UpdatePasswordForm() {
   const serverError = useSelector(form$.serverError);
   const verified = useSelector(form$.verified);
 
+  const params = useLocalSearchParams<{ action?: 'update' | 'reset' }>();
+
   const { updatePassword } = useAuthPresenter();
 
   const alertRef = useRef<AlertRef>(null);
@@ -33,8 +35,10 @@ export function UpdatePasswordForm() {
       if (res) {
         alertRef.current
           ?.show(
-            'Password reset',
-            'Your password has been successfully reset. Click below to log in magically.'
+            params.action === 'reset' ? 'Password reset' : 'Password Updated',
+            params.action === 'reset'
+              ? 'Your password has been successfully reset. Click below to log in magically.'
+              : 'Your password has been updated successfully'
           )
           .then((res) => {
             router.replace('/');
@@ -43,7 +47,7 @@ export function UpdatePasswordForm() {
     });
   };
 
-  if (!verified && serverError) {
+  if (!verified && serverError && params.action === 'reset') {
     return (
       <Column style={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
         <Text>{serverError}</Text>

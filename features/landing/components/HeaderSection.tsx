@@ -34,8 +34,7 @@ export function HeaderSection() {
 
         <Show if={media.md}>
           <Row style={styles.navLinks}>
-            <Text style={styles.link}>Home</Text>
-            <Text style={styles.link}>Pricing</Text>
+            <Text></Text>
           </Row>
         </Show>
       </Row>
@@ -74,7 +73,9 @@ function DropdownMenu() {
             style={[{ backgroundColor: theme.colors.card }, styles.content]}>
             <DropdownMenuPrimitive.Item style={styles.item}>
               <SettingsIcon size={20} color={theme.colors.typography} />
-              <Text style={styles.itemText}>Settings</Text>
+              <Link href="/settings">
+                <Text style={styles.itemText}>Settings</Text>
+              </Link>
             </DropdownMenuPrimitive.Item>
             <DropdownMenuPrimitive.Item style={styles.item}>
               <CreditCardIcon color={theme.colors.typography} size={20} />

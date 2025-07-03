@@ -100,7 +100,6 @@ export function useAuthPresenter() {
   ) {
     authService.verifyOtpWithToken({ token, type, email }).then((res) => {
       if (res.error) {
-        console.log("verify error ", res.error);
         updatePasswordFormStore$.serverError.set(res.error?.message);
       } else {
         router.push("/(auth)/update-password");
