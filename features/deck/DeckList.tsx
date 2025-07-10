@@ -30,6 +30,7 @@ export function DeckList({ decks }: DeckListProps) {
         <Column style={[alignCenter, gap16]}>
           <Text variant="h1">Welcome to Skill Dial</Text>
           <Text variant="h2">Decks</Text>
+          <Link href="/problem/a2222222-2222-2222-2222-222222222222">Problem</Link>
         </Column>
       }
       key={media.md ? 'large' : 'small'}
