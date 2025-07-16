@@ -75,7 +75,7 @@ export const TabBar: React.FC<TabBarProps> = ({
             style={{
               padding: 8,
               margin: 4,
-              backgroundColor: isActive ? theme.colors.tab : theme.colors.card,
+              backgroundColor: isActive ? theme.colors.card : theme.colors.tab,
               opacity: disabled ? 0.4 : isActive ? 1 : 0.7,
             }}>
             {/* If a custom renderer is provided, use it; otherwise just show text */}
