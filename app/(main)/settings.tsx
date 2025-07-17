@@ -1,9 +1,3 @@
-import { SettingsScreen } from '@/features/user/SettingsScreen';
+import { SettingsScreen } from "~/features/user/settings.screen";
 
-export default function Settings() {
-  return (
-    <>
-      <SettingsScreen />
-    </>
-  );
-}
+export default SettingsScreen;

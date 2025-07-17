@@ -1,2 +1,2 @@
-import { ProblemDetailScreen } from '@/features/problem/ProblemDetailScreen';
+import { ProblemDetailScreen } from "~/features/problem/problem-detail.screen";
 export default ProblemDetailScreen;

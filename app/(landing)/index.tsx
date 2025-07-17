@@ -1,3 +1,3 @@
-import { LandingScreen } from '@/features/landing/LandingScreen';
+import { LandingScreen } from "~/features/landing/landing-screen";
 
 export default LandingScreen;

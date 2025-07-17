@@ -1,8 +1,5 @@
-import { flex } from '@/styles';
-
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from './ThemeProvider';
-import { HeaderSection } from '@/features/landing/components/HeaderSection';
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Header } from "~/components/header";
 
 export const Container = ({
   children,
@@ -11,10 +8,9 @@ export const Container = ({
   children: React.ReactNode;
   showHeader?: boolean;
 }) => {
-  const { theme } = useTheme();
   return (
-    <SafeAreaView style={[flex, { backgroundColor: theme.colors.background }]}>
-      {showHeader ? <HeaderSection /> : null}
+    <SafeAreaView className="flex-1">
+      {showHeader ? <Header /> : null}
       {children}
     </SafeAreaView>
   );

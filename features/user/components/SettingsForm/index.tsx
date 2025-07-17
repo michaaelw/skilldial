@@ -1,28 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
   ScrollView, // 👈 new
-} from 'react-native';
-import { Button } from '@/components/Button';
+} from "react-native";
 
-import { Column } from '@/components/Column';
-import { Input } from '@/components/Input';
+import { alignCenter, flex, gap16, gap8, mxAuto, p8, wMax } from "~/styles";
+import { useSelector } from "@legendapp/state/react";
 
-import { Text } from '@/components/Text';
-import { alignCenter, flex, fontBold, gap16, gap8, mxAuto, p8, wMax } from '@/styles';
-import { useSelector } from '@legendapp/state/react';
+import { useAuthPresenter } from "~/features/auth/auth.presenter";
+import { useSettingsFormStore } from "./settings-form.store";
 
-import { useAuthPresenter } from '@/features/auth/AuthPresenter';
-import { useSettingsFormStore } from './SettingsFormStore';
-
-import { useTheme } from '@/components/ThemeProvider';
-
-import { Separator } from '@/components/Separator';
-import { Row } from '@/components/Row';
-import { Spinner } from '@/components/icons/Spinner';
-import { Link } from 'expo-router';
-import { useUserStore } from '../../UserStore';
+import { Link } from "expo-router";
+import { useUserStore } from "../../user.store";
+import { Column } from "~/components/ui/column";
+import { Text } from "~/components/ui/text";
+import { Separator } from "~/components/separator";
+import { Row } from "~/components/ui/row";
+import { Input } from "~/components/ui/input";
+import { Spinner } from "~/components/icons/Spinner";
+import { Button } from "~/components/ui/button";
 
 export function SettingsForm() {
   const formStore$ = useSettingsFormStore();
@@ -31,7 +28,7 @@ export function SettingsForm() {
   const errors = useSelector(formStore$.errors);
   const updatePending = useSelector(formStore$.updatePending);
   const { handleCreateAccount } = useAuthPresenter();
-  const { theme } = useTheme();
+
   const isValid = useSelector(formStore$.isValid);
   const profile = useSelector(userStore$.profile);
 
@@ -42,20 +39,25 @@ export function SettingsForm() {
   return (
     <KeyboardAvoidingView
       style={[flex]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20} // tweak if you have a header
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20} // tweak if you have a header
     >
-      <ScrollView contentContainerStyle={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}>
+      <ScrollView
+        contentContainerStyle={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}
+      >
         <Column style={[gap8]}>
           <Text>Account</Text>
-          <Text style={{ color: theme.colors.lightText }}>
-            Update your account settings. Set your preferred language and timezone.
+          <Text className="opacity-60">
+            Update your account settings. Set your preferred language and
+            timezone.
           </Text>
         </Column>
-        <Separator style={{ marginVertical: 0 }} />
+        <Separator className="my-0" />
 
         <Column style={[gap8]}>
-          {touched.username && <Text variant="error">{errors.username}</Text>}
+          {touched.username && (
+            <Text className="text-red-500">{errors.username}</Text>
+          )}
 
           <Column style={[flex]}>
             <Text>Username</Text>
@@ -71,15 +73,15 @@ export function SettingsForm() {
               {updatePending ? <Spinner /> : null}
             </Row>
 
-            <Text style={{ color: theme.colors.lightText }}>
-              This is your public display name. It can be a real name of a pseudonym. You can only
-              change this once every 30 days.
+            <Text className="opacity-60">
+              This is your public display name. It can be a real name of a
+              pseudonym. You can only change this once every 30 days.
             </Text>
           </Column>
         </Column>
 
         <Link href="/update-password?action=update" asChild>
-          <Button variant="secondary" title="Change password" />
+          <Button variant="secondary">Change password</Button>
         </Link>
       </ScrollView>
     </KeyboardAvoidingView>
