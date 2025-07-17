@@ -1,3 +1,3 @@
-import { UpdatePasswordScreen } from '@/features/auth/UpdatePasswordScreen';
+import { UpdatePasswordScreen } from "~/features/auth/update-password.screen";
 
 export default UpdatePasswordScreen;

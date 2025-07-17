@@ -1,7 +1,9 @@
-import { DeckDetailScreen } from '@/features/deck/DeckDetailScreen';
-import * as deckService from '@/features/deck/DeckService';
+import { DeckDetailScreen } from "~/features/deck/deck-detail.screen";
+import * as deckService from "~/features/deck/deck.service";
 
-export async function generateStaticParams(): Promise<Record<string, string>[]> {
+export async function generateStaticParams(): Promise<
+  Record<string, string>[]
+> {
   const decks = (await deckService.getDecks()) || [];
   // Return an array of params to generate static HTML files for.
   // Each entry in the array will be a new page.
