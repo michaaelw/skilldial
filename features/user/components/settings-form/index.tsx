@@ -43,10 +43,10 @@ export function SettingsForm() {
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20} // tweak if you have a header
     >
       <ScrollView
-        contentContainerStyle={[wMax, mxAuto, { maxWidth: 600 }, gap16, p8]}
+        contentContainerStyle={[wMax, mxAuto, { width: 600 }, gap16, p8]}
       >
         <Column style={[gap8]}>
-          <Text>Account</Text>
+          <Text className="font-semibold">Account</Text>
           <Text className="opacity-60">
             Update your account settings. Set your preferred language and
             timezone.
@@ -60,7 +60,7 @@ export function SettingsForm() {
           )}
 
           <Column style={[flex]}>
-            <Text>Username</Text>
+            <Text className="font-semibold">Username</Text>
 
             <Row style={[flex, alignCenter, gap8]}>
               <Input
@@ -81,7 +81,9 @@ export function SettingsForm() {
         </Column>
 
         <Link href="/update-password?action=update" asChild>
-          <Button variant="secondary">Change password</Button>
+          <Button variant="secondary">
+            <Text>Change password</Text>
+          </Button>
         </Link>
       </ScrollView>
     </KeyboardAvoidingView>
